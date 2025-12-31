@@ -1,122 +1,234 @@
-/* تنسيقات جديدة */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق دير الزور</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 18px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .btn {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        footer {
+            margin-top: 40px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        .ad-form {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .ads-list {
+            margin-top: 20px;
+            text-align: right;
+        }
+        
+        .ad-item {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-right: 5px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>سوق دير الزور</h1>
+            <p class="subtitle">بيع وشراء داخل المحافظة</p>
+        </header>
+        
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="showAddForm()">
+                <span>📝</span>
+                أضف إعلان
+            </button>
+            
+            <button class="btn btn-secondary" onclick="showAds()">
+                <span>🔍</span>
+                تصفح الإعلانات
+            </button>
+        </div>
+        
+        <div id="adForm" class="ad-form">
+            <h3>أضف إعلان جديد</h3>
+            <input type="text" class="input" id="title" placeholder="عنوان الإعلان">
+            <textarea class="input" id="description" placeholder="وصف الإعلان" rows="3"></textarea>
+            <input type="text" class="input" id="price" placeholder="السعر">
+            <input type="text" class="input" id="phone" placeholder="رقم الهاتف">
+            <button class="btn btn-primary" onclick="addAd()" style="margin-top: 10px;">نشر الإعلان</button>
+            <button class="btn btn-secondary" onclick="hideForm()" style="margin-top: 10px;">إلغاء</button>
+        </div>
+        
+        <div id="adsList" class="ads-list" style="display: none;">
+            <h3>الإعلانات المتاحة</h3>
+            <div id="adsContainer"></div>
+        </div>
+        
+        <footer>
+            <p>© 2025 سوق دير الزور - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
 
-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 20px;
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
-    color: white;
-    border-radius: 15px;
-}
-
-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2em;
-    opacity: 0.9;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 30px 0;
-}
-
-.btn {
-    padding: 18px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-.btn.primary {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-}
-
-.btn.secondary {
-    background: linear-gradient(135deg, #2196F3, #1976D2);
-    color: white;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.input {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-.ad-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 15px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-right: 5px solid #4CAF50;
-}
-
-.ad-card h3 {
-    color: #2E7D32;
-    margin-bottom: 10px;
-}
-
-.ad-card .price {
-    color: #D32F2F;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.ad-card .phone {
-    color: #1976D2;
-    font-weight: bold;
-}
-
-footer {
-    text-align: center;
-    margin-top: 50px;
-    padding: 20px;
-    color: #666;
-    border-top: 1px solid #eee;
-}
-
-/* تصميم متجاوب */
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-    
-    header h1 {
-        font-size: 2em;
-    }
-    
-    .btn {
-        padding: 15px 20px;
-        font-size: 16px;
-    }
-}
+    <script>
+        // تأكد من أن JavaScript يعمل
+        console.log("موقع سوق دير الزور يعمل!");
+        
+        // وظائف الأزرار
+        function showAddForm() {
+            document.getElementById('adForm').style.display = 'block';
+            document.getElementById('adsList').style.display = 'none';
+            alert('🔧 سيتم تفعيل إضافة الإعلانات قريباً!');
+        }
+        
+        function showAds() {
+            document.getElementById('adsList').style.display = 'block';
+            document.getElementById('adForm').style.display = 'none';
+            
+            // عرض إعلانات تجريبية
+            document.getElementById('adsContainer').innerHTML = `
+                <div class="ad-item">
+                    <h4>سيارة تويوتا 2020</h4>
+                    <p>سيارة بحالة جيدة، موديل 2020، لون أبيض</p>
+                    <p><strong>السعر:</strong> 50,000 ريال</p>
+                    <p><strong>الهاتف:</strong> 05xx xxx xxx</p>
+                </div>
+                <div class="ad-item">
+                    <h4>شقة للإيجار</h4>
+                    <p>شقة 3 غرف في حي الورود، طابق ثالث</p>
+                    <p><strong>الإيجار:</strong> 2,000 ريال/شهر</p>
+                    <p><strong>الهاتف:</strong> 05xx xxx xxx</p>
+                </div>
+                <div class="ad-item">
+                    <h4>جوال أيفون 13</h4>
+                    <p>جوال أيفون 13 برو، 256 جيجا، لون أزرق</p>
+                    <p><strong>السعر:</strong> 3,500 ريال</p>
+                    <p><strong>الهاتف:</strong> 05xx xxx xxx</p>
+                </div>
+            `;
+        }
+        
+        function addAd() {
+            const title = document.getElementById('title').value;
+            const desc = document.getElementById('description').value;
+            const price = document.getElementById('price').value;
+            const phone = document.getElementById('phone').value;
+            
+            if(title && desc && price && phone) {
+                alert('✅ تم إضافة الإعلان بنجاح!\nسيتم تفعيل قاعدة البيانات قريباً.');
+                hideForm();
+            } else {
+                alert('⚠️ يرجى ملء جميع الحقول');
+            }
+        }
+        
+        function hideForm() {
+            document.getElementById('adForm').style.display = 'none';
+            // مسح الحقول
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('phone').value = '';
+        }
+        
+        // إظهار رسالة ترحيب
+        window.onload = function() {
+            setTimeout(() => {
+                console.log('✅ الموقع جاهز للاستخدام');
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
