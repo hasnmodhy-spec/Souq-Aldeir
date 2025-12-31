@@ -478,3 +478,92 @@
     </script>
 </body>
 </html 
+<!-- نظام المستخدمين -->
+<script>
+    // التحقق من حالة تسجيل الدخول
+    function checkAuthStatus() {
+        const user = JSON.parse(localStorage.getItem('soug_current_user'));
+        const authButtons = document.querySelector('.auth-buttons');
+        
+        if (authButtons) {
+            if (user) {
+                authButtons.innerHTML = `
+                    <div class="user-menu">
+                        <button class="btn btn-outline" onclick="toggleUserMenu()">
+                            <i class="fas fa-user"></i> ${user.name.split(' ')[0]}
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="userDropdown">
+                            <a href="pages/dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="pages/my-ads.html"><i class="fas fa-ad"></i> إعلاناتي</a>
+                            <a href="pages/messages.html"><i class="fas fa-comments"></i> الرسائل</a>
+                            <a href="pages/profile.html"><i class="fas fa-user-cog"></i> إعدادات الحساب</a>
+                            <hr>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <button class="btn btn-outline" onclick="window.location.href='pages/login.html'">
+                        <i class="fas fa-sign-in-alt"></i> دخول
+                    </button>
+                    <button class="btn btn-primary" onclick="window.location.href='pages/register.html'">
+                        <i class="fas fa-user-plus"></i> تسجيل
+                    </button>
+                `;
+            }
+        }
+    }
+    
+    function toggleUserMenu() {
+        const dropdown = document.getElementById('userDropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+    
+    function logout() {
+        localStorage.removeItem('soug_current_user');
+        window.location.reload();
+    }
+    
+    // تطبيق عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', checkAuthStatus);
+</script>
+
+<style>
+    .user-menu {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background: white;
+        min-width: 200px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border-radius: 10px;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+    
+    .dropdown-menu a {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+        background: #f8f9fa;
+    }
+    
+    .dropdown-menu hr {
+        margin: 10px 0;
+        border: none;
+        border-top: 1px solid #eee;
+    }
+</style>
