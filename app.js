@@ -1,5 +1,11 @@
-// تطبيق سوق دير الزور
-console.log('تم تحميل تطبيق سوق دير الزور بنجاح!');
+// تخزين الإعلانات في localStorage
+let ads = JSON.parse(localStorage.getItem('soug-ads')) || [];
 
-// يمكنك إضافة وظائف JavaScript هنا لاحقاً
-// مثل تخزين الإعلانات محلياً أو الاتصال بقاعدة بيانات
+function saveAd(ad) {
+    ads.push(ad);
+    localStorage.setItem('soug-ads', JSON.stringify(ads));
+}
+
+function loadAds() {
+    return ads;
+}
