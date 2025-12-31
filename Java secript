@@ -1,0 +1,218 @@
+// تطبيق سوق دير الزور - الملف الرئيسي
+console.log('🚀 تطبيق سوق دير الزور يعمل!');
+
+// تهيئة التطبيق
+document.addEventListener('DOMContentLoaded', function() {
+    // تهيئة القائمة المتنقلة
+    initMobileMenu();
+    
+    // تحميل الإعلانات
+    loadLatestAds();
+    
+    // تهيئة النماذج
+    initForms();
+    
+    // إظهار إشعار ترحيبي
+    showNotification('مرحباً بك في سوق دير الزور!', 'success');
+});
+
+// تهيئة القائمة المتنقلة
+function initMobileMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+    // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+}
+
+// تحميل أحدث الإعلانات
+function loadLatestAds() {
+    const adsGrid = document.getElementById('adsGrid');
+    if (!adsGrid) return;
+
+    // بيانات تجريبية للإعلانات
+    const sampleAds = [
+        {
+            id: 1,
+            title: "سيارة تويوتا كامري 2020",
+            price: "85,000 ريال",
+            location: "دير الزور - حي الجورة",
+            image: "https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=سيارة",
+            category: "سيارات"
+        },
+        {
+            id: 2,
+            title: "شقة للإيجار 3 غرف",
+            price: "2,500 ريال/شهر",
+            location: "دير الزور - حي الثورة",
+            image: "https://via.placeholder.com/400x300/2196F3/FFFFFF?text=عقار",
+            category: "عقارات"
+        },
+        {
+            id: 3,
+            title: "جوال آيفون 13 برو",
+            price: "4,200 ريال",
+            location: "دير الزور - حي المطار",
+            image: "https://via.placeholder.com/400x300/FF9800/FFFFFF?text=إلكتروني",
+            category: "إلكترونيات"
+        },
+        {
+            id: 4,
+            title: "عمل في مطعم",
+            price: "3,000 ريال/شهر",
+            location: "دير الزور - مركز المدينة",
+            image: "https://via.placeholder.com/400x300/9C27B0/FFFFFF?text=وظيفة",
+            category: "وظائف"
+        },
+        {
+            id: 5,
+            title: "خدمة نقل أثاث",
+            price: "سعر حسب المسافة",
+            location: "دير الزور - جميع الأحياء",
+            image: "https://via.placeholder.com/400x300/00BCD4/FFFFFF?text=خدمة",
+            category: "خدمات"
+        },
+        {
+            id: 6,
+            title: "أثاث منزلي كامل",
+            price: "7,500 ريال",
+            location: "دير الزور - حي الروضة",
+            image: "https://via.placeholder.com/400x300/795548/FFFFFF?text=أثاث",
+            category: "منزل"
+        }
+    ];
+
+    // عرض الإعلانات
+    adsGrid.innerHTML = sampleAds.map(ad => `
+        <div class="ad-card" onclick="viewAd(${ad.id})">
+            <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+            <div class="ad-content">
+                <h3 class="ad-title">${ad.title}</h3>
+                <div class="ad-price">${ad.price}</div>
+                <div class="ad-location">
+                    <i class="fas fa-map-marker-alt"></i> ${ad.location}
+                </div>
+                <div class="ad-category">${ad.category}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// عرض تفاصيل الإعلان
+function viewAd(adId) {
+    showNotification(`جاري تحميل الإعلان رقم ${adId}...`, 'info');
+    // هنا سيتم تحميل صفحة تفاصيل الإعلان
+    window.location.href = `pages/ad-details.html?id=${adId}`;
+}
+
+// فتح نافذة إضافة إعلان
+function openAddAdModal() {
+    const user = JSON.parse(localStorage.getItem('soug_user'));
+    if (!user) {
+        showNotification('يجب تسجيل الدخول أولاً', 'warning');
+        openLoginModal();
+        return;
+    }
+    
+    // هنا سيتم فتح نافذة إضافة إعلان
+    showNotification('جاري فتح نموذج إضافة إعلان...', 'info');
+}
+
+// إظهار إشعار
+function showNotification(message, type = 'info') {
+    const container = document.getElementById('notificationContainer');
+    if (!container) return;
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                            type === 'error' ? 'exclamation-circle' : 
+                            type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    container.appendChild(notification);
+    
+    // إزالة الإشعار بعد 5 ثوان
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+}
+
+// تهيئة النماذج
+function initForms() {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+    }
+    
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleRegister();
+        });
+    }
+}
+
+// التحكم في النوافذ المنبثقة
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function openRegisterModal() {
+    closeLoginModal();
+    document.getElementById('registerModal').style.display = 'flex';
+}
+
+function closeRegisterModal() {
+    document.getElementById('registerModal').style.display = 'none';
+}
+
+// إغلاق النوافذ عند النقر خارجها
+window.onclick = function(event) {
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    
+    if (event.target === loginModal) {
+        closeLoginModal();
+    }
+    if (event.target === registerModal) {
+        closeRegisterModal();
+    }
+};
+
+// Service Worker للتطبيق
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('ServiceWorker registered:', registration);
+            })
+            .catch(error => {
+                console.log('ServiceWorker registration failed:', error);
+            });
+    });
+}

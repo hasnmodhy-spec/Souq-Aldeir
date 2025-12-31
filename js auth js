@@ -1,0 +1,223 @@
+// نظام المصادقة والتسجيل
+class AuthManager {
+    constructor() {
+        this.currentUser = this.getCurrentUser();
+    }
+    
+    // تسجيل الدخول
+    login(email, password) {
+        // محاكاة تسجيل الدخول
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // هنا سيتم الاتصال بالسيرفر الحقيقي
+                const users = JSON.parse(localStorage.getItem('soug_users') || '[]');
+                const user = users.find(u => 
+                    (u.email === email || u.phone === email) && u.password === password
+                );
+                
+                if (user) {
+                    this.currentUser = user;
+                    localStorage.setItem('soug_user', JSON.stringify(user));
+                    resolve(user);
+                } else {
+                    reject('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+                }
+            }, 1000);
+        });
+    }
+    
+    // تسجيل مستخدم جديد
+    register(userData) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const users = JSON.parse(localStorage.getItem('soug_users') || '[]');
+                
+                // التحقق من عدم وجود حساب بنفس البريد أو الهاتف
+                const exists = users.some(u => 
+                    u.email === userData.email || u.phone === userData.phone
+                );
+                
+                if (exists) {
+                    reject('هذا البريد الإلكتروني أو رقم الهاتف مسجل مسبقاً');
+                    return;
+                }
+                
+                // إضافة المستخدم
+                const newUser = {
+                    id: Date.now(),
+                    ...userData,
+                    createdAt: new Date().toISOString(),
+                    role: 'user'
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('soug_users', JSON.stringify(users));
+                localStorage.setItem('soug_user', JSON.stringify(newUser));
+                
+                this.currentUser = newUser;
+                resolve(newUser);
+            }, 1500);
+        });
+    }
+    
+    // تسجيل الخروج
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem('soug_user');
+        showNotification('تم تسجيل الخروج بنجاح', 'success');
+        window.location.reload();
+    }
+    
+    // الحصول على المستخدم الحالي
+    getCurrentUser() {
+        const user = localStorage.getItem('soug_user');
+        return user ? JSON.parse(user) : null;
+    }
+    
+    // التحقق من تسجيل الدخول
+    isLoggedIn() {
+        return this.currentUser !== null;
+    }
+}
+
+// إنشاء كائن المصادقة
+const auth = new AuthManager();
+
+// معالجة تسجيل الدخول
+async function handleLogin() {
+    const form = document.getElementById('loginForm');
+    const email = form.querySelector('input[type="text"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    
+    try {
+        showNotification('جاري تسجيل الدخول...', 'info');
+        const user = await auth.login(email, password);
+        
+        showNotification(`مرحباً ${user.name} 👋`, 'success');
+        closeLoginModal();
+        
+        // تحديث واجهة المستخدم
+        updateUIAfterLogin(user);
+        
+    } catch (error) {
+        showNotification(error, 'error');
+    }
+}
+
+// معالجة التسجيل
+async function handleRegister() {
+    const form = document.getElementById('registerForm');
+    const inputs = form.querySelectorAll('input');
+    
+    const userData = {
+        name: inputs[0].value,
+        phone: inputs[1].value,
+        email: inputs[2].value,
+        password: inputs[3].value
+    };
+    
+    try {
+        showNotification('جاري إنشاء حسابك...', 'info');
+        const user = await auth.register(userData);
+        
+        showNotification('تم إنشاء حسابك بنجاح! 🎉', 'success');
+        closeRegisterModal();
+        
+        updateUIAfterLogin(user);
+        
+    } catch (error) {
+        showNotification(error, 'error');
+    }
+}
+
+// تحديث واجهة المستخدم بعد تسجيل الدخول
+function updateUIAfterLogin(user) {
+    const authButtons = document.querySelector('.auth-buttons');
+    const userMenu = document.querySelector('.user-menu');
+    
+    if (authButtons) {
+        authButtons.innerHTML = `
+            <div class="user-dropdown">
+                <button class="btn btn-outline" onclick="toggleUserMenu()">
+                    <i class="fas fa-user"></i> ${user.name.split(' ')[0]}
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="pages/dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                    <a href="pages/my-ads.html"><i class="fas fa-ad"></i> إعلاناتي</a>
+                    <a href="pages/messages.html"><i class="fas fa-comments"></i> الرسائل</a>
+                    <a href="pages/profile.html"><i class="fas fa-user-cog"></i> إعدادات الحساب</a>
+                    <hr>
+                    <a href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                </div>
+            </div>
+        `;
+    }
+    
+    // إضافة ستايل للقائمة المنسدلة
+    const style = document.createElement('style');
+    style.textContent = `
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-menu a:hover {
+            background: #f8f9fa;
+        }
+        
+        .dropdown-menu hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// تبديل قائمة المستخدم
+function toggleUserMenu() {
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+}
+
+// إغلاق قائمة المستخدم عند النقر خارجها
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('userDropdown');
+    const toggleBtn = document.querySelector('.user-dropdown button');
+    
+    if (dropdown && toggleBtn && 
+        !dropdown.contains(e.target) && 
+        !toggleBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    if (auth.isLoggedIn()) {
+        updateUIAfterLogin(auth.currentUser);
+    }
+});
