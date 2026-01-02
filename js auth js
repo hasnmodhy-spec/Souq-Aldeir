@@ -1,223 +1,435 @@
-// نظام المصادقة والتسجيل
-class AuthManager {
-    constructor() {
-        this.currentUser = this.getCurrentUser();
-    }
+// ملف auth.js - نظام تسجيل الدخول والمستخدمين
+
+// إدارة حالة تسجيل الدخول
+let currentUser = null;
+let users = [];
+
+// تهيئة نظام المصادقة
+document.addEventListener('DOMContentLoaded', function() {
+    // تحميل المستخدمين من التخزين المحلي
+    loadUsersFromStorage();
     
-    // تسجيل الدخول
-    login(email, password) {
-        // محاكاة تسجيل الدخول
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // هنا سيتم الاتصال بالسيرفر الحقيقي
-                const users = JSON.parse(localStorage.getItem('soug_users') || '[]');
-                const user = users.find(u => 
-                    (u.email === email || u.phone === email) && u.password === password
-                );
-                
-                if (user) {
-                    this.currentUser = user;
-                    localStorage.setItem('soug_user', JSON.stringify(user));
-                    resolve(user);
-                } else {
-                    reject('البريد الإلكتروني أو كلمة المرور غير صحيحة');
-                }
-            }, 1000);
-        });
-    }
+    // التحقق من حالة تسجيل الدخول
+    checkLoginStatus();
     
-    // تسجيل مستخدم جديد
-    register(userData) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const users = JSON.parse(localStorage.getItem('soug_users') || '[]');
-                
-                // التحقق من عدم وجود حساب بنفس البريد أو الهاتف
-                const exists = users.some(u => 
-                    u.email === userData.email || u.phone === userData.phone
-                );
-                
-                if (exists) {
-                    reject('هذا البريد الإلكتروني أو رقم الهاتف مسجل مسبقاً');
-                    return;
-                }
-                
-                // إضافة المستخدم
-                const newUser = {
-                    id: Date.now(),
-                    ...userData,
-                    createdAt: new Date().toISOString(),
-                    role: 'user'
-                };
-                
-                users.push(newUser);
-                localStorage.setItem('soug_users', JSON.stringify(users));
-                localStorage.setItem('soug_user', JSON.stringify(newUser));
-                
-                this.currentUser = newUser;
-                resolve(newUser);
-            }, 1500);
-        });
-    }
-    
-    // تسجيل الخروج
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem('soug_user');
-        showNotification('تم تسجيل الخروج بنجاح', 'success');
-        window.location.reload();
-    }
-    
-    // الحصول على المستخدم الحالي
-    getCurrentUser() {
-        const user = localStorage.getItem('soug_user');
-        return user ? JSON.parse(user) : null;
-    }
-    
-    // التحقق من تسجيل الدخول
-    isLoggedIn() {
-        return this.currentUser !== null;
+    // إعداد نماذج المصادقة
+    setupAuthForms();
+});
+
+// تحميل المستخدمين من التخزين المحلي
+function loadUsersFromStorage() {
+    const storedUsers = localStorage.getItem('souqUsers');
+    if (storedUsers) {
+        users = JSON.parse(storedUsers);
+    } else {
+        // بيانات المستخدمين الافتراضية
+        users = [
+            {
+                id: 1,
+                name: 'أحمد محمد',
+                email: 'ahmed@example.com',
+                phone: '0551234567',
+                password: '123456',
+                createdAt: '2024-01-01',
+                adsCount: 3,
+                rating: 4.8
+            },
+            {
+                id: 2,
+                name: 'سارة علي',
+                email: 'sara@example.com',
+                phone: '0557654321',
+                password: '123456',
+                createdAt: '2024-01-05',
+                adsCount: 5,
+                rating: 4.9
+            }
+        ];
+        saveUsersToStorage();
     }
 }
 
-// إنشاء كائن المصادقة
-const auth = new AuthManager();
+// حفظ المستخدمين في التخزين المحلي
+function saveUsersToStorage() {
+    localStorage.setItem('souqUsers', JSON.stringify(users));
+}
 
-// معالجة تسجيل الدخول
-async function handleLogin() {
-    const form = document.getElementById('loginForm');
-    const email = form.querySelector('input[type="text"]').value;
-    const password = form.querySelector('input[type="password"]').value;
-    
-    try {
-        showNotification('جاري تسجيل الدخول...', 'info');
-        const user = await auth.login(email, password);
-        
-        showNotification(`مرحباً ${user.name} 👋`, 'success');
-        closeLoginModal();
-        
-        // تحديث واجهة المستخدم
-        updateUIAfterLogin(user);
-        
-    } catch (error) {
-        showNotification(error, 'error');
+// التحقق من حالة تسجيل الدخول
+function checkLoginStatus() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        currentUser = JSON.parse(loggedInUser);
+        updateUIForLoggedInUser();
+    } else {
+        updateUIForLoggedOutUser();
     }
 }
 
-// معالجة التسجيل
-async function handleRegister() {
-    const form = document.getElementById('registerForm');
-    const inputs = form.querySelectorAll('input');
+// إعداد نماذج المصادقة
+function setupAuthForms() {
+    // نموذج تسجيل الدخول
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
     
-    const userData = {
-        name: inputs[0].value,
-        phone: inputs[1].value,
-        email: inputs[2].value,
-        password: inputs[3].value
+    // نموذج التسجيل
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', handleRegister);
+    }
+}
+
+// التعامل مع تسجيل الدخول
+function handleLogin(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // التحقق من البيانات
+    if (!email || !password) {
+        showNotification('الرجاء إدخال البريد الإلكتروني وكلمة المرور', 'error');
+        return;
+    }
+    
+    // البحث عن المستخدم
+    const user = users.find(u => 
+        (u.email === email || u.phone === email) && 
+        u.password === password
+    );
+    
+    if (!user) {
+        showNotification('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
+        return;
+    }
+    
+    // تسجيل الدخول الناجح
+    loginUser(user);
+}
+
+// التعامل مع التسجيل
+function handleRegister(e) {
+    e.preventDefault();
+    
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('registerEmail').value;
+    const phone = document.getElementById('phoneNumber').value;
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    // التحقق من البيانات
+    if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
+        showNotification('الرجاء ملء جميع الحقول المطلوبة', 'error');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        showNotification('كلمتا المرور غير متطابقتين', 'error');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showNotification('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+        return;
+    }
+    
+    // التحقق من عدم وجود مستخدم مسجل بنفس البريد الإلكتروني
+    const existingUser = users.find(u => u.email === email || u.phone === phone);
+    if (existingUser) {
+        showNotification('البريد الإلكتروني أو رقم الهاتف مسجل مسبقاً', 'error');
+        return;
+    }
+    
+    // إنشاء مستخدم جديد
+    const newUser = {
+        id: users.length + 1,
+        name: `${firstName} ${lastName}`,
+        email: email,
+        phone: phone,
+        password: password,
+        createdAt: new Date().toISOString().split('T')[0],
+        adsCount: 0,
+        rating: 5.0
     };
     
-    try {
-        showNotification('جاري إنشاء حسابك...', 'info');
-        const user = await auth.register(userData);
-        
-        showNotification('تم إنشاء حسابك بنجاح! 🎉', 'success');
-        closeRegisterModal();
-        
-        updateUIAfterLogin(user);
-        
-    } catch (error) {
-        showNotification(error, 'error');
+    // إضافة المستخدم إلى القائمة
+    users.push(newUser);
+    saveUsersToStorage();
+    
+    // تسجيل الدخول تلقائياً
+    loginUser(newUser);
+    
+    // إغلاق نافذة التسجيل
+    $('#registerModal').modal('hide');
+    
+    // إعادة تعيين النموذج
+    e.target.reset();
+}
+
+// تسجيل دخول المستخدم
+function loginUser(user) {
+    currentUser = user;
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    
+    // تحديث واجهة المستخدم
+    updateUIForLoggedInUser();
+    
+    // إغلاق نافذة تسجيل الدخول
+    $('#loginModal').modal('hide');
+    
+    // عرض رسالة الترحيب
+    showNotification(`مرحباً ${user.name}! تم تسجيل الدخول بنجاح`, 'success');
+    
+    // تحديث إحصائيات الموقع
+    if (typeof updateStatistics === 'function') {
+        updateStatistics();
     }
 }
 
-// تحديث واجهة المستخدم بعد تسجيل الدخول
-function updateUIAfterLogin(user) {
-    const authButtons = document.querySelector('.auth-buttons');
-    const userMenu = document.querySelector('.user-menu');
+// تسجيل خروج المستخدم
+function logoutUser() {
+    currentUser = null;
+    localStorage.removeItem('loggedInUser');
     
-    if (authButtons) {
-        authButtons.innerHTML = `
-            <div class="user-dropdown">
-                <button class="btn btn-outline" onclick="toggleUserMenu()">
-                    <i class="fas fa-user"></i> ${user.name.split(' ')[0]}
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown-menu" id="userDropdown">
-                    <a href="pages/dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                    <a href="pages/my-ads.html"><i class="fas fa-ad"></i> إعلاناتي</a>
-                    <a href="pages/messages.html"><i class="fas fa-comments"></i> الرسائل</a>
-                    <a href="pages/profile.html"><i class="fas fa-user-cog"></i> إعدادات الحساب</a>
-                    <hr>
-                    <a href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
-                </div>
-            </div>
+    // تحديث واجهة المستخدم
+    updateUIForLoggedOutUser();
+    
+    // عرض رسالة
+    showNotification('تم تسجيل الخروج بنجاح', 'info');
+    
+    // إعادة توجيه إلى الصفحة الرئيسية
+    window.scrollTo(0, 0);
+}
+
+// تحديث واجهة المستخدم للمستخدم المسجل دخوله
+function updateUIForLoggedInUser() {
+    // تحديث زر المستخدم
+    const userDropdown = document.getElementById('userDropdown');
+    if (userDropdown) {
+        userDropdown.innerHTML = `
+            <i class="fas fa-user-circle"></i> ${currentUser.name.split(' ')[0]}
         `;
+        
+        // تحديث قائمة المستخدم
+        const dropdownMenu = userDropdown.nextElementSibling;
+        if (dropdownMenu) {
+            dropdownMenu.innerHTML = `
+                <li class="dropdown-header">مرحباً ${currentUser.name}</li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#myAds"><i class="fas fa-bullhorn"></i> إعلاناتي</a></li>
+                <li><a class="dropdown-item" href="#messages"><i class="fas fa-envelope"></i> الرسائل</a></li>
+                <li><a class="dropdown-item" href="#favorites"><i class="fas fa-heart"></i> المفضلة</a></li>
+                <li><a class="dropdown-item" href="#settings"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            `;
+        }
     }
     
-    // إضافة ستايل للقائمة المنسدلة
-    const style = document.createElement('style');
-    style.textContent = `
-        .user-dropdown {
-            position: relative;
-        }
-        
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-radius: 10px;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-        
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 20px;
-            color: #333;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        
-        .dropdown-menu a:hover {
-            background: #f8f9fa;
-        }
-        
-        .dropdown-menu hr {
-            margin: 10px 0;
-            border: none;
-            border-top: 1px solid #eee;
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// تبديل قائمة المستخدم
-function toggleUserMenu() {
-    const dropdown = document.getElementById('userDropdown');
-    if (dropdown) {
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    // تحديث قائمة الجوال
+    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+    if (mobileLoginBtn) {
+        mobileLoginBtn.innerHTML = `<i class="fas fa-user-circle"></i> حسابي`;
+        mobileLoginBtn.onclick = function() {
+            // عرض قائمة خيارات المستخدم
+            const options = `
+                <div class="user-mobile-menu">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle fa-2x"></i>
+                        <div>
+                            <strong>${currentUser.name}</strong>
+                            <small>${currentUser.email}</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="#myAds" class="mobile-menu-item">
+                        <i class="fas fa-bullhorn"></i> إعلاناتي
+                    </a>
+                    <a href="#messages" class="mobile-menu-item">
+                        <i class="fas fa-envelope"></i> الرسائل
+                    </a>
+                    <a href="#favorites" class="mobile-menu-item">
+                        <i class="fas fa-heart"></i> المفضلة
+                    </a>
+                    <hr>
+                    <button class="mobile-menu-item text-danger" onclick="logoutUser()">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
+            `;
+            
+            // إنشاء وعرض القائمة
+            const menu = document.createElement('div');
+            menu.className = 'mobile-menu user-mobile-menu';
+            menu.innerHTML = options;
+            document.body.appendChild(menu);
+            
+            // إغلاق القائمة عند النقر خارجها
+            setTimeout(() => {
+                menu.addEventListener('click', function(e) {
+                    if (e.target === menu) {
+                        menu.remove();
+                    }
+                });
+            }, 100);
+        };
     }
-}
-
-// إغلاق قائمة المستخدم عند النقر خارجها
-document.addEventListener('click', (e) => {
-    const dropdown = document.getElementById('userDropdown');
-    const toggleBtn = document.querySelector('.user-dropdown button');
     
-    if (dropdown && toggleBtn && 
-        !dropdown.contains(e.target) && 
-        !toggleBtn.contains(e.target)) {
-        dropdown.style.display = 'none';
+    // إظهار أزرار الإعلانات
+    const navMyAds = document.getElementById('navMyAds');
+    if (navMyAds) {
+        navMyAds.style.display = 'flex';
     }
-});
+    
+    // تحديث زر إضافة إعلان
+    const postAdBtn = document.getElementById('postAdBtn');
+    if (postAdBtn) {
+        postAdBtn.innerHTML = `<i class="fas fa-plus-circle"></i> أضف إعلان`;
+        postAdBtn.onclick = function() {
+            if (typeof showPostAdModal === 'function') {
+                showPostAdModal();
+            }
+        };
+    }
+    
+    // تحديث زر إضافة إعلان للجوال
+    const mobilePostAdBtn = document.getElementById('mobilePostAdBtn');
+    if (mobilePostAdBtn) {
+        mobilePostAdBtn.innerHTML = `<i class="fas fa-plus-circle"></i> أضف إعلان`;
+        mobilePostAdBtn.onclick = function() {
+            if (typeof showPostAdModal === 'function') {
+                showPostAdModal();
+            }
+        };
+    }
+}
 
-// التحقق من حالة تسجيل الدخول عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    if (auth.isLoggedIn()) {
-        updateUIAfterLogin(auth.currentUser);
+// تحديث واجهة المستخدم للمستخدم غير المسجل دخوله
+function updateUIForLoggedOutUser() {
+    // تحديث زر المستخدم
+    const userDropdown = document.getElementById('userDropdown');
+    if (userDropdown) {
+        userDropdown.innerHTML = `<i class="fas fa-user-circle"></i> حسابي`;
+        
+        // تحديث قائمة المستخدم
+        const dropdownMenu = userDropdown.nextElementSibling;
+        if (dropdownMenu) {
+            dropdownMenu.innerHTML = `
+                <li><a class="dropdown-item" href="#" onclick="showLoginModal()"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a></li>
+                <li><a class="dropdown-item" href="#" onclick="showRegisterModal()"><i class="fas fa-user-plus"></i> إنشاء حساب</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+            `;
+        }
     }
-});
+    
+    // تحديث قائمة الجوال
+    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+    if (mobileLoginBtn) {
+        mobileLoginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> تسجيل الدخول`;
+        mobileLoginBtn.onclick = showLoginModal;
+    }
+    
+    // إخفاء أزرار الإعلانات
+    const navMyAds = document.getElementById('navMyAds');
+    if (navMyAds) {
+        navMyAds.style.display = 'none';
+    }
+    
+    // تحديث زر إضافة إعلان
+    const postAdBtn = document.getElementById('postAdBtn');
+    if (postAdBtn) {
+        postAdBtn.innerHTML = `<i class="fas fa-plus-circle"></i> أضف إعلان`;
+        postAdBtn.onclick = function() {
+            showNotification('يجب تسجيل الدخول أولاً لنشر إعلان', 'warning');
+            showLoginModal();
+        };
+    }
+    
+    // تحديث زر إضافة إعلان للجوال
+    const mobilePostAdBtn = document.getElementById('mobilePostAdBtn');
+    if (mobilePostAdBtn) {
+        mobilePostAdBtn.innerHTML = `<i class="fas fa-plus-circle"></i> أضف إعلان`;
+        mobilePostAdBtn.onclick = function() {
+            showNotification('يجب تسجيل الدخول أولاً لنشر إعلان', 'warning');
+            showLoginModal();
+        };
+    }
+}
+
+// عرض نافذة تسجيل الدخول
+function showLoginModal() {
+    $('#loginModal').modal('show');
+}
+
+// عرض نافذة التسجيل
+function showRegisterModal() {
+    $('#registerModal').modal('show');
+}
+
+// التحقق مما إذا كان المستخدم مسجلاً دخوله
+function isLoggedIn() {
+    return currentUser !== null;
+}
+
+// الحصول على معلومات المستخدم الحالي
+function getCurrentUser() {
+    return currentUser;
+}
+
+// تحديث معلومات المستخدم
+function updateUserProfile(updatedInfo) {
+    if (!currentUser) return false;
+    
+    const userIndex = users.findIndex(u => u.id === currentUser.id);
+    if (userIndex === -1) return false;
+    
+    // تحديث المعلومات
+    users[userIndex] = { ...users[userIndex], ...updatedInfo };
+    currentUser = users[userIndex];
+    
+    // حفظ التحديثات
+    saveUsersToStorage();
+    localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
+    
+    // تحديث واجهة المستخدم
+    updateUIForLoggedInUser();
+    
+    return true;
+}
+
+// زيادة عدد إعلانات المستخدم
+function incrementUserAdsCount() {
+    if (!currentUser) return;
+    
+    const userIndex = users.findIndex(u => u.id === currentUser.id);
+    if (userIndex === -1) return;
+    
+    users[userIndex].adsCount++;
+    currentUser.adsCount++;
+    
+    saveUsersToStorage();
+    localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
+}
+
+// عرض الإشعارات
+function showNotification(message, type = 'info') {
+    // يمكن استخدام نفس وظيفة showNotification من app.js
+    if (typeof window.showNotification === 'function') {
+        window.showNotification(message, type);
+    } else {
+        // بديل بسيط إذا لم تكن الوظيفة موجودة
+        alert(message);
+    }
+}
+
+// تصدير الوظائف للاستخدام العالمي
+window.showLoginModal = showLoginModal;
+window.showRegisterModal = showRegisterModal;
+window.logoutUser = logoutUser;
+window.isLoggedIn = isLoggedIn;
+window.getCurrentUser = getCurrentUser;
+window.updateUserProfile = updateUserProfile;
+window.incrementUserAdsCount = incrementUserAdsCount;
