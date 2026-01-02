@@ -1,184 +1,793 @@
-<!-- في قسم المنتجات الأكثر طلباً -->
-<div class="container">
-    <h2 class="text-center mb-4 gradient-text" style="font-size: 2.5rem; font-weight: 800;">🔥 المنتجات الأكثر مبيعاً</h2>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق الدير | Souq Aldeir - متجرك الإلكتروني الأول</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     
-    <div class="row">
-        <!-- منتج 1: غلاية كهربائية -->
-        <div class="col-md-4 mb-4">
-            <div class="product-card">
-                <span class="product-badge" style="background: #ff4757;">الأكثر مبيعاً</span>
-                <button class="wishlist-btn">
-                    <i class="far fa-heart"></i>
-                </button>
-                <div class="product-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974545.png" alt="غلاية كهربائية">
-                </div>
-                <div class="product-info">
-                    <h5 class="product-title">غلاية كهربائية سريعة الغلي - أمان تلقائي</h5>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <span class="product-price">120 ر.س</span>
-                        </div>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="text-muted ms-2">(247)</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" data-product="غلاية كهربائية">
-                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                    </button>
-                </div>
-            </div>
-        </div>
+    <style>
+        /* تخصيص الألوان والخطوط */
+        :root {
+            --primary-blue: #2563eb;
+            --deep-purple: #7c3aed;
+            --vibrant-orange: #f97316;
+            --emerald-green: #10b981;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+        }
+        body { font-family: 'Almarai', sans-serif; background-color: var(--light-bg); color: var(--dark-text); padding-top: 80px; }
         
-        <!-- منتج 2: خلاط كهربائي -->
-        <div class="col-md-4 mb-4">
-            <div class="product-card">
-                <span class="product-badge" style="background: var(--accent-color);">الأفضل تقييماً</span>
-                <button class="wishlist-btn">
-                    <i class="far fa-heart"></i>
-                </button>
-                <div class="product-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974489.png" alt="خلاط كهربائي">
-                </div>
-                <div class="product-info">
-                    <h5 class="product-title">خلاط كهربائي متعدد الوظائف - 5 سرعات</h5>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <span class="product-price">210 ر.س</span>
-                        </div>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="text-muted ms-2">(189)</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" data-product="خلاط كهربائي">
-                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                    </button>
-                </div>
-            </div>
-        </div>
+        /* شريط التنقل العلوي الثابت */
+        .main-navbar {
+            background: linear-gradient(90deg, var(--primary-blue), var(--deep-purple));
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
+        }
+        .brand-logo { font-size: 1.8rem; font-weight: 800; color: white !important; }
+        .brand-logo i { color: #fbbf24; }
+        .nav-icon-btn {
+            color: white;
+            margin: 0 8px;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        .nav-icon-btn:hover { color: #fbbf24; transform: translateY(-2px); }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+        }
         
-        <!-- منتج 3: طقم أواني 7 قطع -->
-        <div class="col-md-4 mb-4">
-            <div class="product-card">
-                <span class="product-badge" style="background: var(--success-color);">الأكثر طلباً</span>
-                <button class="wishlist-btn">
-                    <i class="far fa-heart"></i>
-                </button>
-                <div class="product-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974551.png" alt="طقم أواني">
-                </div>
-                <div class="product-info">
-                    <h5 class="product-title">طقم أواني طهي 7 قطع - مقاوم للخدش</h5>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <span class="product-price">320 ر.س</span>
-                        </div>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span class="text-muted ms-2">(312)</span>
-                        </div>
+        /* لوحة إعلانية رئيسية كبيرة */
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            border-radius: 20px;
+            margin: 20px 0 40px 0;
+            text-align: center;
+        }
+        .hero-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; }
+        .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .hero-btn {
+            background: linear-gradient(45deg, var(--vibrant-orange), #f59e0b);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        /* شريط الأقسام العلوي المميز */
+        .top-categories-bar {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 70px;
+            z-index: 1020;
+        }
+        .top-cat-item {
+            text-align: center;
+            padding: 15px 10px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .top-cat-item:hover {
+            background-color: #e0f2fe;
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        .top-cat-item.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--deep-purple));
+            color: white;
+        }
+        .top-cat-icon { font-size: 1.8rem; margin-bottom: 10px; color: var(--primary-blue); }
+        .top-cat-item.active .top-cat-icon { color: white; }
+        
+        /* أزرار الأقسام الجانبية العائمة */
+        .floating-side-categories {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1010;
+        }
+        @media (max-width: 992px) {
+            .floating-side-categories { display: none; }
+        }
+        .side-cat-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .side-cat-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: scale(1.1) translateX(8px);
+        }
+        .side-cat-label {
+            position: absolute;
+            right: 65px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s, right 0.3s;
+            pointer-events: none;
+        }
+        .side-cat-btn:hover .side-cat-label {
+            opacity: 1;
+            right: 70px;
+        }
+        
+        /* بطاقات المنتجات المحسنة */
+        .product-card-v2 {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            border: 2px solid transparent;
+            margin-bottom: 25px;
+        }
+        .product-card-v2:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--vibrant-orange);
+        }
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 2;
+        }
+        .badge-hot { background-color: #ef4444; color: white; }
+        .badge-sale { background-color: var(--emerald-green); color: white; }
+        .badge-new { background-color: var(--primary-blue); color: white; }
+        .product-img-container {
+            height: 220px;
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        .product-img-container img {
+            max-height: 90%;
+            transition: transform 0.5s ease;
+        }
+        .product-card-v2:hover .product-img-container img { transform: scale(1.08); }
+        .product-info-v2 { padding: 20px; }
+        .product-title-v2 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+            height: 52px;
+            overflow: hidden;
+        }
+        .product-price-v2 {
+            color: var(--primary-blue);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        .product-old-price { text-decoration: line-through; color: #94a3b8; margin-left: 10px; font-size: 0.95rem; }
+        .product-rating { color: #fbbf24; font-size: 0.9rem; }
+        .product-sale-count { color: #64748b; font-size: 0.85rem; margin-right: 8px; }
+        .add-cart-btn-v2 {
+            background: linear-gradient(45deg, var(--primary-blue), var(--deep-purple));
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        .add-cart-btn-v2:hover {
+            background: linear-gradient(45deg, var(--deep-purple), var(--primary-blue));
+            transform: translateY(-2px);
+        }
+        
+        /* قسم "من نحن" المحدث */
+        .about-section-v2 {
+            background: linear-gradient(135deg, #ffffff, #f0f9ff);
+            padding: 60px 0;
+            border-radius: 20px;
+            margin: 50px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .about-stats-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            height: 100%;
+            border-top: 5px solid var(--emerald-green);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: block;
+            line-height: 1;
+        }
+        .stat-label { color: #64748b; font-size: 0.95rem; margin-top: 10px; }
+        
+        /* تصميم للهواتف */
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-banner { padding: 70px 15px; }
+            .top-categories-bar {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 15px;
+                top: 60px;
+            }
+            .top-cat-item { display: inline-block; min-width: 130px; margin: 0 8px; }
+            .brand-logo { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== شريط التنقل العلوي ========== -->
+    <nav class="main-navbar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <!-- الشعار -->
+                <a class="navbar-brand brand-logo" href="#">
+                    <i class="fas fa-store"></i> سوق الدير
+                </a>
+                
+                <!-- أزرار التنقل الرئيسية (تظهر على الأجهزة الكبيرة) -->
+                <div class="d-none d-lg-flex align-items-center">
+                    <a href="#" class="nav-icon-btn"><i class="fas fa-home"></i></a>
+                    <a href="#products" class="nav-icon-btn"><i class="fas fa-th-large"></i></a>
+                    <a href="#offers" class="nav-icon-btn"><i class="fas fa-percent"></i></a>
+                    <a href="#about" class="nav-icon-btn"><i class="fas fa-info-circle"></i></a>
+                    
+                    <!-- زر السلة مع عداد -->
+                    <div class="position-relative">
+                        <a href="#" class="nav-icon-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="globalCartCount">5</span>
+                        </a>
                     </div>
-                    <button class="add-to-cart-btn" data-product="طقم أواني 7 قطع">
-                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                    
+                    <!-- زر حساب المستخدم -->
+                    <a href="#" class="nav-icon-btn" data-bs-toggle="modal" data-bs-target="#userModal">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                </div>
+                
+                <!-- زر القائمة للجوال -->
+                <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- قائمة الجوال المنهارة -->
+            <div class="collapse d-lg-none mt-3" id="mobileNav">
+                <div class="d-flex flex-column bg-light rounded p-3">
+                    <a href="#" class="btn btn-outline-primary mb-2"><i class="fas fa-home me-2"></i> الرئيسية</a>
+                    <a href="#products" class="btn btn-outline-primary mb-2"><i class="fas fa-th-large me-2"></i> المنتجات</a>
+                    <a href="#offers" class="btn btn-outline-primary mb-2"><i class="fas fa-percent me-2"></i> العروض</a>
+                    <a href="#about" class="btn btn-outline-primary mb-2"><i class="fas fa-info-circle me-2"></i> من نحن</a>
+                    <a href="#" class="btn btn-warning mb-2"><i class="fas fa-shopping-cart me-2"></i> السلة <span class="badge bg-dark" id="mobileCartCount">5</span></a>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#userModal">
+                        <i class="fas fa-user-circle me-2"></i> حسابي
                     </button>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- قسم العروض الخاصة المحدث -->
-<div class="container">
-    <div class="featured-offer">
-        <div class="offer-badge">خصم 50%!</div>
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h3 style="font-size: 2rem; font-weight: 800;">العروض الخاصة 🎁</h3>
-                <p>خصومات حتى 50% على تشكيلة مختارة من المنتجات. استفد من العرض الآن قبل نفاد الكمية!</p>
-                <button class="cta-button" style="background: white; color: var(--accent-color);" id="special-offer-btn">
-                    <i class="fas fa-gift"></i> استفد من العرض
-                </button>
-            </div>
-            <div class="col-md-4 text-center">
-                <i class="fas fa-percent" style="font-size: 5rem;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- قسم "من نحن" -->
-<section id="about" class="py-5" style="background: linear-gradient(135deg, var(--light-color), #ffffff);">
+    </nav>
+    
+    <!-- ========== لوحة إعلانية كبيرة رئيسية ========== -->
     <div class="container">
-        <h2 class="text-center mb-5 gradient-text" style="font-size: 2.5rem; font-weight: 800;">من نحن 👥</h2>
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="p-4" style="background: white; border-radius: 15px; box-shadow: var(--shadow);">
-                    <h4 class="mb-3" style="color: var(--primary-color); font-weight: 700;">رسالتنا</h4>
+        <div class="hero-banner">
+            <h1 class="hero-title">تخفيضات الموسم! وفر حتى 50%</h1>
+            <p class="hero-subtitle">اكتشف تشكيلتنا الواسعة من المنتجات المنزلية والأجهزة الكهربائية بأسعار لا تقارن. جودة مضمونة وتوصيل سريع لجميع أنحاء المملكة.</p>
+            <button class="btn hero-btn">
+                <i class="fas fa-bolt me-2"></i> ابدأ التسوق الآن
+            </button>
+        </div>
+    </div>
+    
+    <!-- ========== شريط الأقسام العلوي الثابت ========== -->
+    <div class="container">
+        <div class="top-categories-bar">
+            <div class="row g-3 text-center">
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item active" onclick="filterProducts('all')">
+                        <i class="fas fa-gem top-cat-icon"></i>
+                        <div>المميزة</div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item" onclick="filterProducts('kitchen')">
+                        <i class="fas fa-blender top-cat-icon"></i>
+                        <div>المطبخ</div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item" onclick="filterProducts('home')">
+                        <i class="fas fa-couch top-cat-icon"></i>
+                        <div>المنزل</div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item" onclick="filterProducts('electric')">
+                        <i class="fas fa-plug top-cat-icon"></i>
+                        <div>كهربائية</div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item" onclick="filterProducts('lighting')">
+                        <i class="fas fa-lightbulb top-cat-icon"></i>
+                        <div>إضاءة</div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="top-cat-item" onclick="filterProducts('bath')">
+                        <i class="fas fa-bath top-cat-icon"></i>
+                        <div>الحمام</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== أقسام جانبية عائمة ========== -->
+    <div class="floating-side-categories">
+        <div class="side-cat-btn">
+            <i class="fas fa-fire"></i>
+            <span class="side-cat-label">العروض الساخنة</span>
+        </div>
+        <div class="side-cat-btn">
+            <i class="fas fa-shipping-fast"></i>
+            <span class="side-cat-label">توصيل سريع</span>
+        </div>
+        <div class="side-cat-btn">
+            <i class="fas fa-headset"></i>
+            <span class="side-cat-label">الدعم الفني</span>
+        </div>
+        <div class="side-cat-btn">
+            <i class="fas fa-arrow-up"></i>
+            <span class="side-cat-label">العودة للأعلى</span>
+        </div>
+    </div>
+    
+    <!-- ========== قسم المنتجات (المقتبس من موقعك) ========== -->
+    <div class="container" id="products">
+        <h2 class="text-center mb-1" style="color: var(--dark-text); font-weight: 800; font-size: 2.2rem;">🔥 المنتجات الأكثر مبيعاً</h2>
+        <p class="text-center mb-5" style="color: #64748b;">اختر من بين أفضل المنتجات تقييماً وأكثرها طلباً</p>
+        
+        <div class="row">
+            <!-- المنتج 1: الغلاية -->
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card-v2">
+                    <span class="product-badge badge-hot">الأكثر مبيعاً</span>
+                    <div class="product-img-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974545.png" alt="غلاية كهربائية سريعة">
+                    </div>
+                    <div class="product-info-v2">
+                        <h5 class="product-title-v2">غلاية كهربائية سريعة الغلي مع مؤشر مستوى الماء وأمان تلقائي</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="product-price-v2">120 ر.س</span>
+                            </div>
+                            <div>
+                                <span class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="product-sale-count">(247)</span>
+                            </div>
+                        </div>
+                        <p class="text-muted small mb-3">غلاية سريعة مع إغلاق تلقائي عند الغليان لحماية كاملة</p>
+                        <button class="add-cart-btn-v2" onclick="addToCart('غلاية كهربائية', 120)">
+                            <i class="fas fa-cart-plus me-2"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- المنتج 2: الخلاط -->
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card-v2">
+                    <span class="product-badge badge-sale">خصم حصري</span>
+                    <div class="product-img-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974489.png" alt="خلاط كهربائي">
+                    </div>
+                    <div class="product-info-v2">
+                        <h5 class="product-title-v2">خلاط كهربائي متعدد الوظائف بقوة 800 وات مع 5 سرعات مختلفة</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="product-price-v2">210 ر.س</span>
+                                <span class="product-old-price">250 ر.س</span>
+                            </div>
+                            <div>
+                                <span class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </span>
+                                <span class="product-sale-count">(189)</span>
+                            </div>
+                        </div>
+                        <p class="text-muted small mb-3">يأتي مع 4 ملحقات للعجن والخلط والطحن</p>
+                        <button class="add-cart-btn-v2" onclick="addToCart('خلاط كهربائي', 210)">
+                            <i class="fas fa-cart-plus me-2"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- المنتج 3: طقم الأواني -->
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card-v2">
+                    <span class="product-badge badge-new">الأكثر طلباً</span>
+                    <div class="product-img-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974551.png" alt="طقم أواني">
+                    </div>
+                    <div class="product-info-v2">
+                        <h5 class="product-title-v2">طقم أواني طهي 7 قطع من مواد عالية الجودة مقاومة للخدش</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="product-price-v2">320 ر.س</span>
+                            </div>
+                            <div>
+                                <span class="product-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </span>
+                                <span class="product-sale-count">(312)</span>
+                            </div>
+                        </div>
+                        <p class="text-muted small mb-3">مقابض مقاومة للحرارة وتوزيع مثالي للحرارة</p>
+                        <button class="add-cart-btn-v2" onclick="addToCart('طقم أواني 7 قطع', 320)">
+                            <i class="fas fa-cart-plus me-2"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== قسم "من نحن" المحدث ========== -->
+    <div class="container about-section-v2" id="about">
+        <h2 class="text-center mb-5" style="color: var(--primary-blue); font-weight: 800; font-size: 2.2rem;">من نحن 👥</h2>
+        
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="p-4">
+                    <h4 class="mb-4" style="color: var(--deep-purple); font-weight: 700;">رسالتنا</h4>
                     <p class="lead" style="font-size: 1.1rem;">نحن في <strong>سوق الدير</strong> نؤمن بأن جودة الحياة تبدأ من المنزل. لذلك نحرص على توفير أفضل المنتجات المنزلية التي تجعل حياتك أسهل وأكثر راحة.</p>
                     
-                    <h4 class="mt-4 mb-3" style="color: var(--primary-color); font-weight: 700;">لماذا نحن؟</h4>
+                    <h4 class="mt-5 mb-4" style="color: var(--deep-purple); font-weight: 700;">لماذا نحن؟</h4>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> منتجات أصلية بضمان مصدق</li>
-                        <li class="mb-2"><i class="fas fa-shipping-fast text-primary me-2"></i> توصيل سريع لباب المنزل خلال 48 ساعة</li>
-                        <li class="mb-2"><i class="fas fa-headset text-info me-2"></i> دعم فني متواصل على مدار الساعة</li>
-                        <li class="mb-2"><i class="fas fa-shield-alt text-warning me-2"></i> سياسة إرجاع واستبدال لمدة 30 يوماً</li>
-                        <li><i class="fas fa-tag text-danger me-2"></i> أسعار تنافسية وخصومات دائمة</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>منتجات أصلية</strong> بضمان مصدق من الشركات</li>
+                        <li class="mb-3"><i class="fas fa-shipping-fast text-primary me-2"></i> <strong>توصيل سريع</strong> لباب المنزل خلال 24-48 ساعة</li>
+                        <li class="mb-3"><i class="fas fa-headset text-info me-2"></i> <strong>دعم فني</strong> متواصل على مدار الساعة</li>
+                        <li class="mb-3"><i class="fas fa-shield-alt text-warning me-2"></i> <strong>سياسة إرجاع</strong> واستبدال لمدة 30 يوماً</li>
+                        <li><i class="fas fa-tag text-danger me-2"></i> <strong>أسعار تنافسية</strong> وخصومات دائمة على كل المنتجات</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="p-4">
-                    <h4 class="mb-3" style="color: var(--secondary-color); font-weight: 700;">أرقامنا تتحدث</h4>
-                    <div class="row text-center">
-                        <div class="col-6 mb-4">
-                            <div class="counter-item">
-                                <div class="counter-number" style="background: var(--primary-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
-                                    5,000+
-                                </div>
-                                <div class="counter-label mt-2">عميل راضي</div>
-                            </div>
+            
+            <div class="col-lg-6">
+                <h4 class="text-center mb-4" style="color: var(--deep-purple); font-weight: 700;">أرقامنا تتحدث</h4>
+                <div class="row">
+                    <div class="col-6 mb-4">
+                        <div class="about-stats-box">
+                            <span class="stat-number">5,000+</span>
+                            <span class="stat-label">عميل راضي</span>
                         </div>
-                        <div class="col-6 mb-4">
-                            <div class="counter-item">
-                                <div class="counter-number" style="background: var(--secondary-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
-                                    1,200+
-                                </div>
-                                <div class="counter-label mt-2">منتج مميز</div>
-                            </div>
+                    </div>
+                    <div class="col-6 mb-4">
+                        <div class="about-stats-box">
+                            <span class="stat-number">1,200+</span>
+                            <span class="stat-label">منتج مميز</span>
                         </div>
-                        <div class="col-6">
-                            <div class="counter-item">
-                                <div class="counter-number" style="background: var(--accent-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
-                                    98%
-                                </div>
-                                <div class="counter-label mt-2">رضا العملاء</div>
-                            </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="about-stats-box">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">رضا العملاء</span>
                         </div>
-                        <div class="col-6">
-                            <div class="counter-item">
-                                <div class="counter-number" style="background: var(--success-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
-                                    24/7
-                                </div>
-                                <div class="counter-label mt-2">دعم فني</div>
-                            </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="about-stats-box">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">دعم فني</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+    
+    <!-- ========== نافذة تسجيل الدخول / حساب المستخدم ========== -->
+    <div class="modal fade" id="userModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(90deg, var(--primary-blue), var(--deep-purple)); color: white;">
+                    <h5 class="modal-title"><i class="fas fa-user-circle me-2"></i> حساب المستخدم</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="loginForm">
+                        <h5 class="mb-4">تسجيل الدخول</h5>
+                        <div class="mb-3">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" placeholder="example@souq.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" placeholder="أدخل كلمة المرور">
+                        </div>
+                        <button class="btn btn-primary w-100 mb-3" onclick="simulateLogin()">
+                            <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+                        </button>
+                        <p class="text-center small">
+                            ليس لديك حساب؟ <a href="#" onclick="showRegisterForm()" class="text-primary">أنشئ حساباً جديداً</a>
+                        </p>
+                    </div>
+                    
+                    <div id="registerForm" style="display: none;">
+                        <h5 class="mb-4">إنشاء حساب جديد</h5>
+                        <div class="mb-3">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-control" placeholder="أدخل اسمك الكامل">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" placeholder="example@souq.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" placeholder="كلمة مرور قوية">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">تأكيد كلمة المرور</label>
+                            <input type="password" class="form-control" placeholder="أعد إدخال كلمة المرور">
+                        </div>
+                        <button class="btn btn-success w-100 mb-3" onclick="simulateRegister()">
+                            <i class="fas fa-user-plus me-2"></i> إنشاء الحساب
+                        </button>
+                        <p class="text-center small">
+                            لديك حساب بالفعل؟ <a href="#" onclick="showLoginForm()" class="text-primary">سجل الدخول هنا</a>
+                        </p>
+                    </div>
+                    
+                    <div id="userDashboard" style="display: none;">
+                        <h5 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i> لوحة التحكم</h5>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px; color: white; font-size: 1.5rem;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1" id="loggedUserName">محمد أحمد</h6>
+                                <p class="text-muted small mb-0" id="loggedUserEmail">mohamed@souq.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-6 mb-3">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="text-primary fs-4 fw-bold" id="userOrderCount">5</div>
+                                    <div class="small">الطلبات</div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="text-success fs-4 fw-bold" id="userPoints">1,250</div>
+                                    <div class="small">نقطة مكافأة</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline-primary w-100 mb-2">
+                            <i class="fas fa-history me-2"></i> سجل الطلبات
+                        </button>
+                        <button class="btn btn-outline-secondary w-100 mb-2">
+                            <i class="fas fa-cog me-2"></i> إعدادات الحساب
+                        </button>
+                        <button class="btn btn-outline-danger w-100" onclick="logoutUser()">
+                            <i class="fas fa-sign-out-alt me-2"></i> تسجيل الخروج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== تذييل الموقع ========== -->
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3"><i class="fas fa-store me-2"></i> سوق الدير</h5>
+                    <p class="text-light">متجرك الإلكتروني الموثوق لجميع احتياجات المنزل منذ 2010. نقدم أجود المنتجات بأفضل الأسعار.</p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">الرئيسية</a></li>
+                        <li class="mb-2"><a href="#products" class="text-light text-decoration-none">المنتجات</a></li>
+                        <li class="mb-2"><a href="#about" class="text-light text-decoration-none">من نحن</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6>وسائل التواصل</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +966 55 123 4567</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@souq-aldeir.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>تابعنا</h6>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-snapchat"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 سوق الدير. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">تصميم وتطوير فريق سوق الدير</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ========== روابط مكتبات JavaScript ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // الكود البرمجي للوظائف التفاعلية
+        let cartCount = 5;
+        let isUserLoggedIn = false;
+        
+        // دالة إضافة منتج إلى السلة
+        function addToCart(productName, price) {
+            cartCount++;
+            document.getElementById('globalCartCount').textContent = cartCount;
+            document.getElementById('mobileCartCount').textContent = cartCount;
+            
+            // عرض رسالة تأكيد
+            alert(`✅ تمت إضافة "${productName}" إلى سلة التسوق!\nالسعر: ${price} ر.س\nإجمالي المنتجات في السلة: ${cartCount}`);
+            
+            // تأثير بسيط على زر السلة
+            const cartBtn = document.querySelector('.fa-shopping-cart').parentElement;
+            cartBtn.style.transform = 'scale(1.3)';
+            setTimeout(() => { cartBtn.style.transform = 'scale(1)'; }, 300);
+        }
+        
+        // دالة تصفية المنتجات حسب القسم (للأقسام العلوية)
+        function filterProducts(category) {
+            const allItems = document.querySelectorAll('.top-cat-item');
+            allItems.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            const messages = {
+                'all': 'عرض جميع المنتجات',
+                'kitchen': 'جاري عرض منتجات المطبخ',
+                'home': 'جاري عرض منتجات المنزل',
+                'electric': 'جاري عرض الأجهزة الكهربائية',
+                'lighting': 'جاري عرض منتجات الإضاءة',
+                'bath': 'جاري عرض منتجات الحمام'
+            };
+            alert(`🔍 ${messages[category] || 'جاري التصفية...'}`);
+        }
+        
+        // دوال إدارة حساب المستخدم
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('userDashboard').style.display = 'none';
+        }
+        
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'none';
+        }
+        
+        function simulateLogin() {
+            // محاكاة تسجيل الدخول
+            isUserLoggedIn = true;
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'block';
+            alert('✅ تم تسجيل الدخول بنجاح! مرحباً بك في لوحة التحكم.');
+            
+            // يمكن هنا إضافة طلب AJAX حقيقي للخادم
+        }
+        
+        function simulateRegister() {
+            alert('✅ تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.');
+            showLoginForm();
+        }
+        
+        function logoutUser() {
+            isUserLoggedIn = false;
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            alert('✅ تم تسجيل الخروج بنجاح.');
+        }
+        
+        // جعل الأقسام الجانبية تفاعلية
+        document.querySelectorAll('.side-cat-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const labels = ['العروض الساخنة', 'صفحة الشحن', 'اتصل بالدعم', 'العودة للأعلى'];
+                const messages = [
+                    '🚀 انتقال إلى صفحة العروض الحصرية!',
+                    '📦 انتقال إلى معلومات الشحن والتوصيل!',
+                    '📞 انتقال إلى صفحة الدعم الفني!',
+                    '⬆️ العودة إلى أعلى الصفحة...'
+                ];
+                
+                alert(messages[index]);
+                
+                if (index === 3) { // زر "العودة للأعلى"
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // تهيئة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('تم تحميل موقع سوق الدير بنجاح!');
+        });
+    </script>
+</body>
+</html>
