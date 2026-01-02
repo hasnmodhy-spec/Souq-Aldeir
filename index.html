@@ -1,1152 +1,184 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق الدير - Souq Aldeir | المتجر الإلكتروني الأفضل</title>
+<!-- في قسم المنتجات الأكثر طلباً -->
+<div class="container">
+    <h2 class="text-center mb-4 gradient-text" style="font-size: 2.5rem; font-weight: 800;">🔥 المنتجات الأكثر مبيعاً</h2>
     
-    <!-- روابط المكتبات -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #2E86AB;    /* أزرق أنيق */
-            --secondary-color: #A23B72;  /* بنفسجي مميز */
-            --accent-color: #F18F01;     /* برتقالي جذاب */
-            --success-color: #73BFB8;    /* تركواز ناعم */
-            --light-color: #F7F9FC;      /* خلفية فاتحة */
-            --dark-color: #2C3A47;       /* نص داكن */
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            font-family: 'Almarai', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            overflow-x: hidden;
-        }
-        
-        /* شريط التنقل العلوي */
-        .main-navbar {
-            background: linear-gradient(135deg, var(--primary-color), #1B4F72);
-            box-shadow: 0 5px 20px rgba(46, 134, 171, 0.2);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo i {
-            color: var(--accent-color);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            border-radius: 50px;
-            padding: 8px 25px;
-            transition: var(--transition);
-            font-weight: 600;
-            margin: 0 5px;
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            border-color: white;
-        }
-        
-        .cart-btn {
-            background: var(--accent-color);
-            border: none;
-            position: relative;
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            background: #ff4757;
-            color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-        
-        /* لوحة الإعلانات الكبيرة */
-        .hero-banner {
-            margin-top: 80px;
-            height: 500px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-        
-        .hero-content {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-            display: flex;
-            align-items: center;
-            padding: 0 60px;
-        }
-        
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
-        
-        .cta-button {
-            background: linear-gradient(45deg, var(--accent-color), #FF9F1C);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px rgba(241, 143, 1, 0.3);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(241, 143, 1, 0.4);
-            color: white;
-        }
-        
-        /* شريط الأقسام العلوي */
-        .categories-bar {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px 0;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 90px;
-            z-index: 999;
-        }
-        
-        .category-tab {
-            text-align: center;
-            padding: 15px 10px;
-            border-radius: 10px;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        
-        .category-tab:hover {
-            background: var(--light-color);
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .category-tab.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .category-icon {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        /* الأقسام الجانبية */
-        .side-categories {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 998;
-        }
-        
-        .side-category {
-            background: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-color);
-            font-size: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .side-category:hover {
-            transform: scale(1.1) translateX(10px);
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        .side-category span {
-            position: absolute;
-            right: 70px;
-            background: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: var(--transition);
-            pointer-events: none;
-        }
-        
-        .side-category:hover span {
-            opacity: 1;
-            right: 80px;
-        }
-        
-        /* المنتجات */
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            height: 100%;
-            border: 2px solid transparent;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--secondary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .product-img {
-            height: 220px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .product-img img {
-            max-width: 100%;
-            max-height: 100%;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-img img {
-            transform: scale(1.1);
-        }
-        
-        .product-info {
-            padding: 20px;
-        }
-        
-        .product-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-            height: 50px;
-            overflow: hidden;
-        }
-        
-        .product-price {
-            color: var(--primary-color);
-            font-weight: 800;
-            font-size: 1.3rem;
-        }
-        
-        .product-old-price {
-            text-decoration: line-through;
-            color: #999;
-            margin-right: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .add-to-cart-btn {
-            background: linear-gradient(45deg, var(--success-color), #5AC8D8);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .add-to-cart-btn:hover {
-            background: linear-gradient(45deg, #5AC8D8, var(--success-color));
-            transform: translateY(-2px);
-        }
-        
-        .wishlist-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ff4757;
-            border: none;
-            transition: var(--transition);
-        }
-        
-        .wishlist-btn:hover {
-            background: #ff4757;
-            color: white;
-        }
-        
-        /* عداد العروض */
-        .offer-counter {
-            background: linear-gradient(135deg, var(--secondary-color), #C44569);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 40px 0;
-            box-shadow: var(--shadow);
-        }
-        
-        .counter-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .counter-item {
-            display: inline-block;
-            margin: 0 10px;
-        }
-        
-        .counter-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: rgba(255,255,255,0.2);
-            padding: 15px;
-            border-radius: 10px;
-            min-width: 80px;
-            display: inline-block;
-        }
-        
-        .counter-label {
-            font-size: 0.9rem;
-            margin-top: 5px;
-            opacity: 0.9;
-        }
-        
-        /* العروض الخاصة */
-        .featured-offer {
-            background: linear-gradient(45deg, var(--accent-color), #FF9F1C);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .offer-badge {
-            position: absolute;
-            top: 20px;
-            left: -30px;
-            background: #ff4757;
-            color: white;
-            padding: 10px 40px;
-            transform: rotate(-45deg);
-            font-weight: 700;
-        }
-        
-        /* فوتر */
-        .main-footer {
-            background: linear-gradient(135deg, var(--dark-color), #1a252f);
-            color: white;
-            padding: 60px 0 20px;
-            margin-top: 80px;
-        }
-        
-        .footer-section h5 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-            padding-right: 10px;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: var(--transition);
-        }
-        
-        .social-icon:hover {
-            background: var(--accent-color);
-            transform: translateY(-5px);
-        }
-        
-        .newsletter-input {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        
-        .newsletter-input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-        
-        /* التخصيص للجوال */
-        @media (max-width: 768px) {
-            .hero-banner {
-                height: 400px;
-                margin-top: 70px;
-            }
-            
-            .hero-content {
-                padding: 0 20px;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.2rem;
-            }
-            
-            .side-categories {
-                display: none;
-            }
-            
-            .categories-bar {
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 15px;
-            }
-            
-            .category-tab {
-                display: inline-block;
-                min-width: 120px;
-                margin: 0 5px;
-            }
-            
-            .counter-number {
-                font-size: 2rem;
-                min-width: 60px;
-                padding: 10px;
-            }
-        }
-        
-        /* تأثيرات إضافية */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .gradient-text {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-    </style>
-</head>
-<body>
-    <!-- شريط التنعل العلوي -->
-    <nav class="main-navbar">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <!-- الشعار -->
-                <a href="#" class="logo">
-                    <i class="fas fa-store"></i>
-                    <span>سوق الدير</span>
-                </a>
-                
-                <!-- أزرار التنقل -->
-                <div class="d-none d-md-flex align-items-center">
-                    <button class="nav-btn">
-                        <i class="fas fa-home"></i> الرئيسية
-                    </button>
-                    <button class="nav-btn">
-                        <i class="fas fa-fire"></i> الأكثر مبيعاً
-                    </button>
-                    <button class="nav-btn">
-                        <i class="fas fa-percent"></i> العروض
-                    </button>
-                    <button class="nav-btn">
-                        <i class="fas fa-info-circle"></i> من نحن
-                    </button>
-                    <button class="nav-btn cart-btn">
-                        <i class="fas fa-shopping-cart"></i> السلة
-                        <span class="cart-count" id="cart-count">5</span>
+    <div class="row">
+        <!-- منتج 1: غلاية كهربائية -->
+        <div class="col-md-4 mb-4">
+            <div class="product-card">
+                <span class="product-badge" style="background: #ff4757;">الأكثر مبيعاً</span>
+                <button class="wishlist-btn">
+                    <i class="far fa-heart"></i>
+                </button>
+                <div class="product-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974545.png" alt="غلاية كهربائية">
+                </div>
+                <div class="product-info">
+                    <h5 class="product-title">غلاية كهربائية سريعة الغلي - أمان تلقائي</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <span class="product-price">120 ر.س</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-muted ms-2">(247)</span>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" data-product="غلاية كهربائية">
+                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
                     </button>
                 </div>
-                
-                <!-- زر القائمة للجوال -->
-                <button class="btn btn-light d-md-none" onclick="toggleMenu()">
-                    <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        
+        <!-- منتج 2: خلاط كهربائي -->
+        <div class="col-md-4 mb-4">
+            <div class="product-card">
+                <span class="product-badge" style="background: var(--accent-color);">الأفضل تقييماً</span>
+                <button class="wishlist-btn">
+                    <i class="far fa-heart"></i>
+                </button>
+                <div class="product-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974489.png" alt="خلاط كهربائي">
+                </div>
+                <div class="product-info">
+                    <h5 class="product-title">خلاط كهربائي متعدد الوظائف - 5 سرعات</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <span class="product-price">210 ر.س</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-muted ms-2">(189)</span>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" data-product="خلاط كهربائي">
+                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- منتج 3: طقم أواني 7 قطع -->
+        <div class="col-md-4 mb-4">
+            <div class="product-card">
+                <span class="product-badge" style="background: var(--success-color);">الأكثر طلباً</span>
+                <button class="wishlist-btn">
+                    <i class="far fa-heart"></i>
+                </button>
+                <div class="product-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2974/2974551.png" alt="طقم أواني">
+                </div>
+                <div class="product-info">
+                    <h5 class="product-title">طقم أواني طهي 7 قطع - مقاوم للخدش</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <span class="product-price">320 ر.س</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-2">(312)</span>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" data-product="طقم أواني 7 قطع">
+                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- قسم العروض الخاصة المحدث -->
+<div class="container">
+    <div class="featured-offer">
+        <div class="offer-badge">خصم 50%!</div>
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 style="font-size: 2rem; font-weight: 800;">العروض الخاصة 🎁</h3>
+                <p>خصومات حتى 50% على تشكيلة مختارة من المنتجات. استفد من العرض الآن قبل نفاد الكمية!</p>
+                <button class="cta-button" style="background: white; color: var(--accent-color);" id="special-offer-btn">
+                    <i class="fas fa-gift"></i> استفد من العرض
                 </button>
             </div>
-        </div>
-    </nav>
-
-    <!-- قائمة الجوال -->
-    <div id="mobileMenu" class="d-md-none" style="display: none; background: white; padding: 20px; box-shadow: var(--shadow);">
-        <div class="container">
-            <button class="btn btn-primary w-100 mb-2">
-                <i class="fas fa-home"></i> الرئيسية
-            </button>
-            <button class="btn btn-outline-primary w-100 mb-2">
-                <i class="fas fa-fire"></i> الأكثر مبيعاً
-            </button>
-            <button class="btn btn-outline-primary w-100 mb-2">
-                <i class="fas fa-percent"></i> العروض
-            </button>
-            <button class="btn btn-outline-primary w-100 mb-2">
-                <i class="fas fa-info-circle"></i> من نحن
-            </button>
-            <button class="btn btn-warning w-100">
-                <i class="fas fa-shopping-cart"></i> السلة (5)
-            </button>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-percent" style="font-size: 5rem;"></i>
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- لوحة الإعلانات الكبيرة -->
+<!-- قسم "من نحن" -->
+<section id="about" class="py-5" style="background: linear-gradient(135deg, var(--light-color), #ffffff);">
     <div class="container">
-        <div class="hero-banner" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center;">
-            <div class="hero-content">
-                <div class="hero-text animate__animated animate__fadeInRight">
-                    <h1>تخفيضات الصيف الكبرى! 🎉</h1>
-                    <p>احصل على خصم يصل إلى 60% على جميع المنتجات المنزلية والأجهزة الكهربائية. العرض ساري حتى نفاد الكمية!</p>
-                    <button class="cta-button">
-                        <i class="fas fa-bolt"></i> تسوق الآن
-                    </button>
+        <h2 class="text-center mb-5 gradient-text" style="font-size: 2.5rem; font-weight: 800;">من نحن 👥</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="p-4" style="background: white; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h4 class="mb-3" style="color: var(--primary-color); font-weight: 700;">رسالتنا</h4>
+                    <p class="lead" style="font-size: 1.1rem;">نحن في <strong>سوق الدير</strong> نؤمن بأن جودة الحياة تبدأ من المنزل. لذلك نحرص على توفير أفضل المنتجات المنزلية التي تجعل حياتك أسهل وأكثر راحة.</p>
+                    
+                    <h4 class="mt-4 mb-3" style="color: var(--primary-color); font-weight: 700;">لماذا نحن؟</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> منتجات أصلية بضمان مصدق</li>
+                        <li class="mb-2"><i class="fas fa-shipping-fast text-primary me-2"></i> توصيل سريع لباب المنزل خلال 48 ساعة</li>
+                        <li class="mb-2"><i class="fas fa-headset text-info me-2"></i> دعم فني متواصل على مدار الساعة</li>
+                        <li class="mb-2"><i class="fas fa-shield-alt text-warning me-2"></i> سياسة إرجاع واستبدال لمدة 30 يوماً</li>
+                        <li><i class="fas fa-tag text-danger me-2"></i> أسعار تنافسية وخصومات دائمة</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- شريط الأقسام العلوي -->
-    <div class="container">
-        <div class="categories-bar">
-            <div class="row text-center">
-                <div class="col-4 col-md-2">
-                    <div class="category-tab active">
-                        <i class="fas fa-blender category-icon"></i>
-                        <span>أجهزة كهربائية</span>
-                    </div>
-                </div>
-                <div class="col-4 col-md-2">
-                    <div class="category-tab">
-                        <i class="fas fa-utensils category-icon"></i>
-                        <span>أدوات المطبخ</span>
-                    </div>
-                </div>
-                <div class="col-4 col-md-2">
-                    <div class="category-tab">
-                        <i class="fas fa-couch category-icon"></i>
-                        <span>أثاث المنزل</span>
-                    </div>
-                </div>
-                <div class="col-4 col-md-2">
-                    <div class="category-tab">
-                        <i class="fas fa-lightbulb category-icon"></i>
-                        <span>الإضاءة</span>
-                    </div>
-                </div>
-                <div class="col-4 col-md-2">
-                    <div class="category-tab">
-                        <i class="fas fa-bath category-icon"></i>
-                        <span>أدوات الحمام</span>
-                    </div>
-                </div>
-                <div class="col-4 col-md-2">
-                    <div class="category-tab">
-                        <i class="fas fa-tools category-icon"></i>
-                        <span>أدوات وإصلاح</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- الأقسام الجانبية -->
-    <div class="side-categories d-none d-lg-block">
-        <div class="side-category" style="background: var(--primary-color); color: white;">
-            <i class="fas fa-bolt"></i>
-            <span>تخفيضات خاصة</span>
-        </div>
-        <div class="side-category">
-            <i class="fas fa-fire"></i>
-            <span>الأكثر مبيعاً</span>
-        </div>
-        <div class="side-category">
-            <i class="fas fa-gift"></i>
-            <span>عروض الهدايا</span>
-        </div>
-        <div class="side-category">
-            <i class="fas fa-shipping-fast"></i>
-            <span>توصيل مجاني</span>
-        </div>
-    </div>
-
-    <!-- عداد العروض -->
-    <div class="container">
-        <div class="offer-counter">
-            <h3 class="counter-title">ينتهي العرض خلال:</h3>
-            <div class="counter-timer">
-                <div class="counter-item">
-                    <div class="counter-number" id="days">02</div>
-                    <div class="counter-label">أيام</div>
-                </div>
-                <div class="counter-item">
-                    <div class="counter-number" id="hours">15</div>
-                    <div class="counter-label">ساعات</div>
-                </div>
-                <div class="counter-item">
-                    <div class="counter-number" id="minutes">33</div>
-                    <div class="counter-label">دقائق</div>
-                </div>
-                <div class="counter-item">
-                    <div class="counter-number" id="seconds">12</div>
-                    <div class="counter-label">ثواني</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- المنتجات -->
-    <div class="container">
-        <h2 class="text-center mb-4 gradient-text" style="font-size: 2.5rem; font-weight: 800;">🔥 المنتجات الأكثر طلباً</h2>
-        
-        <div class="row">
-            <!-- منتج 1 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <span class="product-badge">خصم 30%</span>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974545.png" alt="غلاية كهربائية">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">غلاية كهربائية سريعة الغلي مع مؤشر مستوى الماء</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-old-price">249 ر.س</span>
-                                <span class="product-price">174 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+            <div class="col-md-6">
+                <div class="p-4">
+                    <h4 class="mb-3" style="color: var(--secondary-color); font-weight: 700;">أرقامنا تتحدث</h4>
+                    <div class="row text-center">
+                        <div class="col-6 mb-4">
+                            <div class="counter-item">
+                                <div class="counter-number" style="background: var(--primary-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
+                                    5,000+
+                                </div>
+                                <div class="counter-label mt-2">عميل راضي</div>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 2 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <span class="product-badge" style="background: var(--accent-color);">الأكثر مبيعاً</span>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974489.png" alt="خلاط كهربائي">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">خلاط كهربائي متعدد الوظائف بقوة 800 وات</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-price">329 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                        <div class="col-6 mb-4">
+                            <div class="counter-item">
+                                <div class="counter-number" style="background: var(--secondary-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
+                                    1,200+
+                                </div>
+                                <div class="counter-label mt-2">منتج مميز</div>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 3 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974523.png" alt="مكواة بخار">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">مكواة بخار قوية بخزان ماء كبير 2000 وات</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-old-price">189 ر.س</span>
-                                <span class="product-price">151 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                        <div class="col-6">
+                            <div class="counter-item">
+                                <div class="counter-number" style="background: var(--accent-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
+                                    98%
+                                </div>
+                                <div class="counter-label mt-2">رضا العملاء</div>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 4 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <span class="product-badge" style="background: var(--success-color);">جديد</span>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974551.png" alt="طقم أواني">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">طقم أواني طهي 10 قطع بمقابض مقاومة للحرارة</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-price">549 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
+                        <div class="col-6">
+                            <div class="counter-item">
+                                <div class="counter-number" style="background: var(--success-color); color: white; padding: 15px; border-radius: 10px; font-size: 2rem;">
+                                    24/7
+                                </div>
+                                <div class="counter-label mt-2">دعم فني</div>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- عرض خاص -->
-    <div class="container">
-        <div class="featured-offer">
-            <div class="offer-badge">عرض خاص!</div>
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h3 style="font-size: 2rem; font-weight: 800;">توصيل مجاني لجميع الطلبات! 🚚</h3>
-                    <p>احصل على توصيل مجاني لجميع طلباتك التي تزيد عن 200 ريال. العرض ساري على جميع مناطق المملكة.</p>
-                    <button class="cta-button" style="background: white; color: var(--accent-color);">
-                        <i class="fas fa-truck"></i> استفد من العرض
-                    </button>
-                </div>
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-shipping-fast" style="font-size: 5rem;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- المزيد من المنتجات -->
-    <div class="container">
-        <h2 class="text-center mb-4 gradient-text" style="font-size: 2.5rem; font-weight: 800;">✨ منتجات مميزة</h2>
-        
-        <div class="row">
-            <!-- منتج 5 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card floating">
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974534.png" alt="فرن كهربائي">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">فرن كهربائي بشواية وعداد رقمي 45 لتر</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-price">449 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 6 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <span class="product-badge">عرض محدود</span>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974517.png" alt="مكنسة كهربائية">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">مكنسة كهربائية لاسلكية بقوة شفط عالية</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-old-price">399 ر.س</span>
-                                <span class="product-price">319 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 7 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974496.png" alt="ميكروويف">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">فرن ميكروويف بشواية وعداد رقمي 28 لتر</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-price">289 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- منتج 8 -->
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="product-card">
-                    <span class="product-badge" style="background: var(--secondary-color);">الأفضل تقييماً</span>
-                    <button class="wishlist-btn">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <div class="product-img">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974472.png" alt="عصارة فواكه">
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-title">عصارة فواكه كهربائية بقوة 500 وات</h5>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-old-price">229 ر.س</span>
-                                <span class="product-price">183 ر.س</span>
-                            </div>
-                            <div class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- الفوتر -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5 class="logo mb-3">
-                        <i class="fas fa-store"></i> سوق الدير
-                    </h5>
-                    <p>متجرك الإلكتروني الموثوق لجميع احتياجات المنزل. نقدم أجود المنتجات بأفضل الأسعار وخدمة توصيل سريعة.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-snapchat-ghost"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5>روابط سريعة</h5>
-                    <div class="footer-links">
-                        <a href="#">الرئيسية</a>
-                        <a href="#">المنتجات</a>
-                        <a href="#">العروض</a>
-                        <a href="#">من نحن</a>
-                        <a href="#">اتصل بنا</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5>خدماتنا</h5>
-                    <div class="footer-links">
-                        <a href="#">التوصيل السريع</a>
-                        <a href="#">الاستبدال والاسترجاع</a>
-                        <a href="#">الضمان والصيانة</a>
-                        <a href="#">الدعم الفني</a>
-                        <a href="#">الأسئلة الشائعة</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5>النشرة البريدية</h5>
-                    <p>اشترك لتحصل على آخر العروض والتخفيضات</p>
-                    <input type="email" class="newsletter-input" placeholder="ادخل بريدك الإلكتروني">
-                    <button class="cta-button w-100">اشترك الآن</button>
-                </div>
-            </div>
-            
-            <div class="row mt-5 pt-4 border-top border-secondary">
-                <div class="col-md-6">
-                    <p>© 2023 سوق الدير. جميع الحقوق محفوظة.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p>تصميم وتطوير فريق سوق الدير</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- الروابط البرمجية -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // عداد التنازلي
-        function updateCountdown() {
-            const now = new Date();
-            const endDate = new Date(now.getTime() + (2 * 24 * 60 * 60 * 1000) + (15 * 60 * 60 * 1000) + (33 * 60 * 1000) + (12 * 1000));
-            
-            const diff = endDate - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // إضافة المنتجات للسلة
-        let cartCount = 5;
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                cartCount++;
-                document.getElementById('cart-count').textContent = cartCount;
-                
-                // تأثير الرجوع
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-                
-                // رسالة تأكيد
-                const productTitle = this.closest('.product-card').querySelector('.product-title').textContent;
-                alert(`تمت إضافة "${productTitle}" إلى سلة التسوق بنجاح! 🛒`);
-            });
-        });
-        
-        // زر المفضلة
-        document.querySelectorAll('.wishlist-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const icon = this.querySelector('i');
-                if (icon.classList.contains('far')) {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                    this.style.color = '#ff4757';
-                    alert('تمت إضافة المنتج إلى المفضلة! ❤️');
-                } else {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                    this.style.color = '#ff4757';
-                    alert('تمت إزالة المنتج من المفضلة!');
-                }
-            });
-        });
-        
-        // تفعيل الأقسام
-        document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                const category = this.querySelector('span').textContent;
-                alert(`جاري عرض منتجات قسم: ${category}`);
-            });
-        });
-        
-        // قائمة الجوال
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-        
-        // تأثير التمرير
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.main-navbar');
-            if (window.scrollY > 50) {
-                navbar.style.padding = '10px 0';
-                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
-            } else {
-                navbar.style.padding = '15px 0';
-                navbar.style.boxShadow = '0 5px 20px rgba(46, 134, 171, 0.2)';
-            }
-        });
-    </script>
-</body>
-</html>
+</section>
