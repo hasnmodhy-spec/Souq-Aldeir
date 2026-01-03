@@ -1,7 +1,7 @@
 {
-  "name": "سوق الدير الزور",
+  "name": "سوق دير الزور المفتوح",
   "short_name": "السوق المفتوح",
-  "description": "منصة السوق المفتوح للبيع والشراء في الدير الزور",
+  "description": "منصة سوق دير الزور المفتوح للبيع والشراء",
   "start_url": "/Souq-Aldeir/index.html",
   "display": "standalone",
   "background_color": "#10b981",
