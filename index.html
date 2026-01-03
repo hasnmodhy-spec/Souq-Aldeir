@@ -200,5 +200,81 @@
             });
         }
     </script>
-</body>
+<!-- لوحة تحكم PWA مبسطة للهاتف -->
+<div style="position:fixed; bottom:10px; left:10px; background:white; padding:10px; border-radius:5px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; max-width:300px; display:none;" id="pwaDebug">
+    <h6 style="margin:0 0 10px 0;">🔧 PWA Debug</h6>
+    <div id="debugInfo" style="font-size:12px;"></div>
+    <button onclick="document.getElementById('pwaDebug').style.display='none'" style="margin-top:5px; font-size:10px;">إغلاق</button>
+</div>
+
+<script>
+// كود فحص PWA للهاتف
+function checkPWA() {
+    let info = '';
+    
+    // 1. فحص Manifest
+    if (document.querySelector('link[rel="manifest"]')) {
+        info += '✅ Manifest موجود<br>';
+    } else {
+        info += '❌ Manifest مفقود<br>';
+    }
+    
+    // 2. فحص Service Worker
+    if ('serviceWorker' in navigator) {
+        info += '✅ Service Worker مدعوم<br>';
+        navigator.serviceWorker.getRegistration()
+            .then(reg => {
+                if (reg) {
+                    info += '✅ SW مسجل<br>';
+                } else {
+                    info += '❌ SW غير مسجل<br>';
+                }
+                updateDebugInfo(info);
+            });
+    } else {
+        info += '❌ Service Worker غير مدعوم<br>';
+    }
+    
+    // 3. فحص وضع التطبيق
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        info += '✅ يعمل كتطبيق مثبت<br>';
+    } else if (window.navigator.standalone) {
+        info += '✅ مثبت على iOS<br>';
+    } else {
+        info += '📱 يعمل كمتصفح عادي<br>';
+    }
+    
+    // 4. فحص الاتصال
+    info += navigator.onLine ? '🌐 اتصال نشط<br>' : '📴 غير متصل<br>';
+    
+    updateDebugInfo(info);
+}
+
+function updateDebugInfo(text) {
+    document.getElementById('debugInfo').innerHTML = text;
+}
+
+// تشغيل الفحص عند فتح الصفحة
+setTimeout(checkPWA, 1000);
+
+// إظهار/إخفاء لوحة التحكم باللمس المزدوج
+let tapCount = 0;
+let lastTap = 0;
+document.addEventListener('touchstart', function(e) {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    
+    if (tapLength < 500 && tapLength > 0) {
+        tapCount++;
+        if (tapCount === 2) { // ثلاث نقرات سريعة
+            const debugPanel = document.getElementById('pwaDebug');
+            debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+            tapCount = 0;
+        }
+    } else {
+        tapCount = 1;
+    }
+    lastTap = currentTime;
+});
+</script></body>
 </html>
