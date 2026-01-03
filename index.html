@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2c3e50">
+    <title>سوق دير الزور المفتوح - نشر إعلان</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <!-- Icons -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏪</text></svg>">
+    
+    <!-- iOS PWA Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container">
+            <h1>🏪 سوق دير الزور المفتوح</h1>
+            <p class="subtitle">نشر إعلان جديد</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- User Status -->
+        <div id="userStatus" class="user-status">
+            <span>مرحباً!</span>
+            <button id="authBtn" class="btn btn-outline">تسجيل الدخول</button>
+        </div>
+
+        <!-- Ad Form -->
+        <section class="ad-form-section">
+            <h2>📝 معلومات الإعلان</h2>
+            
+            <form id="adForm" class="ad-form">
+                <!-- Title -->
+                <div class="form-group">
+                    <label for="adTitle">عنوان الإعلان *</label>
+                    <input type="text" id="adTitle" placeholder="مثال: شقة للإيجار - حي العمال" required>
+                </div>
+
+                <!-- Category -->
+                <div class="form-group">
+                    <label for="adCategory">القسم *</label>
+                    <select id="adCategory" required>
+                        <option value="">اختر القسم</option>
+                        <option value="عقارات">عقارات</option>
+                        <option value="سيارات">سيارات</option>
+                        <option value="أجهزة كهربائية">أجهزة كهربائية</option>
+                        <option value="موبايلات">موبايلات</option>
+                        <option value="أثاث">أثاث</option>
+                        <option value="وظائف">وظائف</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="adDescription">وصف مفصل *</label>
+                    <textarea id="adDescription" rows="5" placeholder="صف السلعة أو الخدمة بالتفصيل..." required></textarea>
+                </div>
+
+                <!-- Price -->
+                <div class="form-group">
+                    <label for="adPrice">السعر (ل.س)</label>
+                    <input type="number" id="adPrice" placeholder="مثال: 500000">
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label for="adPhone">رقم الهاتف *</label>
+                    <input type="tel" id="adPhone" placeholder="09xxxxxxxx" required>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label for="adLocation">الموقع</label>
+                    <input type="text" id="adLocation" placeholder="مثال: دير الزور - حي الجورة">
+                </div>
+
+                <!-- Images -->
+                <div class="form-group">
+                    <label>صور الإعلان (اختياري)</label>
+                    <div class="image-upload">
+                        <input type="file" id="adImages" accept="image/*" multiple style="display: none;">
+                        <label for="adImages" class="upload-btn">
+                            📷 اختيار صور
+                        </label>
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">📤 نشر الإعلان الآن</button>
+                    <button type="button" id="previewBtn" class="btn btn-secondary">👁️ معاينة</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="modal">
+            <div class="modal-content">
+                <h2>معاينة الإعلان</h2>
+                <div id="adPreview"></div>
+                <button id="closePreview" class="btn">إغلاق</button>
+            </div>
+        </div>
+
+        <!-- Ads List -->
+        <section id="adsListSection" class="ads-list-section">
+            <h2>📋 الإعلانات المنشورة</h2>
+            <div id="adsList" class="ads-list"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <p>© 2023 سوق دير الزور المفتوح - جميع الحقوق محفوظة</p>
+            <p class="footer-info">تطبيق ويب تقدمي - يعمل بدون إنترنت</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js" defer></script>
+    <script src="auth.js" defer></script>
+    <script src="ads.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
