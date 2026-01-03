@@ -276,5 +276,34 @@ document.addEventListener('touchstart', function(e) {
     }
     lastTap = currentTime;
 });
-</script></body>
+</script></body><!-- زر تثبيت التطبيق -->
+<div id="installContainer" style="display:none; position:fixed; bottom:20px; left:20px; z-index:10000;">
+    <button id="installButton" 
+            style="background:#10b981; color:white; border:none; padding:12px 20px; border-radius:25px; font-weight:bold; box-shadow:0 4px 12px rgba(16, 185, 129, 0.3);">
+        📲 تثبيت التطبيق
+    </button>
+</div>
+
+<script>
+// عرض زر التثبيت عند توفر الإمكانية
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installContainer').style.display = 'block';
+});
+
+// معالجة النقر على زر التثبيت
+document.getElementById('installButton').addEventListener('click', () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                document.getElementById('installContainer').style.display = 'none';
+            }
+            deferredPrompt = null;
+        });
+    }
+});
+</script>
 </html>
