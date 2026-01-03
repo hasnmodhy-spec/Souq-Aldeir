@@ -2,11 +2,35 @@
   "name": "سوق دير الزور المفتوح",
   "short_name": "سوق دير الزور",
   "description": "السوق المفتوح الأول في دير الزور",
-  "start_url": "/",
+  "dir": "rtl",
+  "lang": "ar",
+  "start_url": "/Souq-Aldeir/index.html",
+  "scope": "/Souq-Aldeir/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#10b981",
+  "orientation": "portrait",
   "icons": [
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
