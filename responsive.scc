@@ -53,5 +53,3 @@
 @media (min-width: 1200px) {
     .ads-list {
         grid-template-columns: repeat(4, 1fr);
-    }
-}
