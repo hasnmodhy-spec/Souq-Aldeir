@@ -1,33 +1,0 @@
-// في نهاية الكود السابق في قسم <script>
-// إضافة تفاعل مع زر العروض الخاصة
-document.getElementById('special-offer-btn').addEventListener('click', function() {
-    alert('🎉 تم تحويلك إلى صفحة العروض الخاصة! استمتع بخصم 50% على المنتجات المحددة.');
-    // يمكن إضافة تحويل لصفحة أخرى هنا
-    // window.location.href = '#products';
-});
-
-// تحسين تفاعل أزرار إضافة للسلة
-document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const productName = this.getAttribute('data-product');
-        cartCount++;
-        document.getElementById('cart-count').textContent = cartCount;
-        
-        // رسالة تأكيد مخصصة
-        Swal.fire({
-            title: 'تمت الإضافة! 🛒',
-            text: `تمت إضافة "${productName}" إلى سلة التسوق بنجاح`,
-            icon: 'success',
-            confirmButtonText: 'متابعة التسوق',
-            confirmButtonColor: 'var(--primary-color)',
-            timer: 2000
-        });
-        
-        // تأثير اهتزاز للسلة
-        const cartBtn = document.querySelector('.cart-btn');
-        cartBtn.style.transform = 'scale(1.1)';
-        setTimeout(() => {
-            cartBtn.style.transform = '';
-        }, 300);
-    });
-});
