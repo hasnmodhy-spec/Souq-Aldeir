@@ -105,4 +105,4 @@ window.checkAdOwnership = checkAdOwnership;
 window.updateUserProfile = updateUserProfile;
 window.changePassword = changePassword;
 window.resetPassword = resetPassword;
-window.sessionManager = sessionManager;
+window.sessionManager = sessionManager
