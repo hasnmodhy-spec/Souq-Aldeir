@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق الدير الزور | السوق المفتوح للبيع والشراء</title>
+    <title>سوق دير الزور المفتوح | منصة البيع والشراء</title>
     
     <!-- روابط المكتبات -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,6 +47,10 @@
             text-decoration: none;
         }
         
+        .logo span {
+            color: var(--dark-color);
+        }
+        
         .nav-btn {
             margin: 0 5px;
             padding: 8px 15px;
@@ -84,6 +88,10 @@
             margin-bottom: 20px;
         }
         
+        .banner-title span {
+            color: var(--accent-color);
+        }
+        
         /* شريط البحث */
         .search-box {
             background: white;
@@ -93,18 +101,6 @@
             margin-bottom: 30px;
         }
         
-        .search-input {
-            border: 2px solid #e5e7eb;
-            padding: 12px 15px;
-            border-radius: 5px;
-            width: 100%;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        
         /* الأقسام العلوية */
         .categories-bar {
             background: white;
@@ -112,25 +108,6 @@
             border-radius: 10px;
             margin-bottom: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .category-item {
-            text-align: center;
-            padding: 15px 10px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .category-item:hover {
-            background-color: #f3f4f6;
-            transform: translateY(-5px);
-        }
-        
-        .category-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
         }
         
         /* بطاقات الإعلانات */
@@ -173,65 +150,6 @@
             padding: 20px;
         }
         
-        .ad-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .ad-location {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        .ad-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .user-avatar {
-            width: 30px;
-            height: 30px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        /* الأقسام الجانبية */
-        .side-categories {
-            position: sticky;
-            top: 100px;
-        }
-        
-        .side-category {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .side-category:hover {
-            background-color: #f3f4f6;
-            transform: translateX(-5px);
-        }
-        
-        /* نافذة تسجيل الدخول */
-        .modal-arabic .modal-header {
-            background: var(--primary-color);
-            color: white;
-        }
-        
         /* الفوتر */
         footer {
             background: var(--dark-color);
@@ -240,24 +158,23 @@
             margin-top: 50px;
         }
         
-        .footer-links a {
-            color: #d1d5db;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .footer-links a:hover {
-            color: white;
+        .footer-brand i {
+            color: var(--primary-color);
         }
         
         @media (max-width: 768px) {
             .banner-title {
                 font-size: 1.8rem;
-            }
-            
-            .main-banner {
-                padding: 40px 0;
             }
         }
     </style>
@@ -268,7 +185,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <a href="#" class="logo">
-                    <i class="fas fa-store"></i> سوق الدير الزور
+                    <i class="fas fa-store"></i> سوق دير الزور <span>المفتوح</span>
                 </a>
                 
                 <div class="d-none d-md-flex align-items-center">
@@ -322,11 +239,17 @@
         <div class="main-banner">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="banner-title">السوق المفتوح للبيع والشراء</h1>
-                    <p class="lead mb-4">بيع واشتري كل ما تحتاجه بسهولة وأمان في سوق الدير الزور</p>
+                    <h1 class="banner-title">مرحباً بكم في <span>سوق دير الزور المفتوح</span></h1>
+                    <p class="lead mb-4">أكبر منصة للبيع والشراء في منطقة دير الزور. بيع واشتري بكل سهولة وأمان</p>
                     <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#postAdModal">
-                        <i class="fas fa-plus-circle"></i> أضف إعلانك الآن
+                        <i class="fas fa-plus-circle"></i> أضف إعلانك مجاناً
                     </button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <i class="fas fa-handshake fa-4x mb-3"></i>
+                        <h5>أكثر من 10,000 صفقة ناجحة</h5>
+                    </div>
                 </div>
             </div>
         </div>
@@ -335,12 +258,17 @@
     <!-- شريط البحث -->
     <div class="container">
         <div class="search-box">
-            <div class="row g-3">
+            <div class="row g-3 align-items-center">
                 <div class="col-md-5">
-                    <input type="text" class="search-input" placeholder="ماذا تبحث عنه؟">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0" placeholder="ماذا تبحث عنه؟ اكتب هنا...">
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <select class="search-input">
+                <div class="col-md-3">
+                    <select class="form-select">
                         <option value="">جميع الأقسام</option>
                         <option value="cars">سيارات</option>
                         <option value="electronics">أجهزة كهربائية</option>
@@ -350,16 +278,16 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="search-input">
+                    <select class="form-select">
                         <option value="">جميع المدن</option>
-                        <option value="riyadh">الرياض</option>
-                        <option value="jeddah">جدة</option>
-                        <option value="dammam">الدمام</option>
+                        <option value="deir">دير الزور</option>
+                        <option value="damascus">دمشق</option>
+                        <option value="aleppo">حلب</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <button class="btn btn-primary w-100">
-                        <i class="fas fa-search"></i> بحث
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
@@ -372,42 +300,63 @@
             <div class="col-lg-9">
                 <!-- الأقسام العلوية -->
                 <div class="categories-bar" id="categories">
-                    <h4 class="mb-4">الأقسام الرئيسية</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="mb-0">الأقسام الرئيسية</h4>
+                        <a href="#" class="text-primary small">عرض الكل</a>
+                    </div>
                     <div class="row">
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-car category-icon"></i>
-                                <div>سيارات</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-car fa-2x text-primary"></i>
+                                </div>
+                                <div class="fw-bold">سيارات</div>
+                                <small class="text-muted">1,245 إعلان</small>
                             </div>
                         </div>
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-mobile-alt category-icon"></i>
-                                <div>هواتف</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-mobile-alt fa-2x text-success"></i>
+                                </div>
+                                <div class="fw-bold">هواتف</div>
+                                <small class="text-muted">892 إعلان</small>
                             </div>
                         </div>
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-home category-icon"></i>
-                                <div>عقارات</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-home fa-2x text-warning"></i>
+                                </div>
+                                <div class="fw-bold">عقارات</div>
+                                <small class="text-muted">567 إعلان</small>
                             </div>
                         </div>
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-laptop category-icon"></i>
-                                <div>أجهزة</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-laptop fa-2x text-info"></i>
+                                </div>
+                                <div class="fw-bold">أجهزة</div>
+                                <small class="text-muted">432 إعلان</small>
                             </div>
                         </div>
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-tshirt category-icon"></i>
-                                <div>ملابس</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-tshirt fa-2x text-danger"></i>
+                                </div>
+                                <div class="fw-bold">ملابس</div>
+                                <small class="text-muted">1,089 إعلان</small>
                             </div>
                         </div>
                         <div class="col-4 col-md-2 mb-3">
-                            <div class="category-item">
-                                <i class="fas fa-couch category-icon"></i>
-                                <div>أثاث</div>
+                            <div class="category-item text-center">
+                                <div class="category-icon mb-2">
+                                    <i class="fas fa-couch fa-2x text-secondary"></i>
+                                </div>
+                                <div class="fw-bold">أثاث</div>
+                                <small class="text-muted">654 إعلان</small>
                             </div>
                         </div>
                     </div>
@@ -415,7 +364,12 @@
 
                 <!-- أحدث الإعلانات -->
                 <div id="ads">
-                    <h4 class="mb-4">أحدث الإعلانات</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="mb-0">أحدث الإعلانات</h4>
+                        <a href="#" class="text-primary">
+                            <i class="fas fa-arrow-left"></i> عرض جميع الإعلانات
+                        </a>
+                    </div>
                     <div class="row" id="adsContainer">
                         <!-- سيتم تحميل الإعلانات هنا -->
                     </div>
@@ -425,21 +379,54 @@
             <!-- الأقسام الجانبية -->
             <div class="col-lg-3">
                 <div class="side-categories">
-                    <div class="side-category">
-                        <i class="fas fa-fire text-danger"></i>
-                        <span>العروض الحارة</span>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-fire text-danger me-2"></i>
+                                العروض الساخنة
+                            </h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom">
+                                    <a href="#" class="text-dark">تويوتا كامري 2015</a>
+                                    <div class="text-success fw-bold">45,000 ر.س</div>
+                                </li>
+                                <li class="py-2 border-bottom">
+                                    <a href="#" class="text-dark">آيفون 13 برو ماكس</a>
+                                    <div class="text-success fw-bold">3,800 ر.س</div>
+                                </li>
+                                <li class="py-2">
+                                    <a href="#" class="text-dark">شقة للإيجار</a>
+                                    <div class="text-success fw-bold">3,500 ر.س/شهر</div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="side-category">
-                        <i class="fas fa-star text-warning"></i>
-                        <span>المميزة</span>
+                    
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-chart-line text-success me-2"></i>
+                                الإحصائيات
+                            </h6>
+                            <div class="text-center">
+                                <div class="display-6 fw-bold text-primary">10,245</div>
+                                <div class="text-muted">إعلان نشط</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="side-category">
-                        <i class="fas fa-bolt text-success"></i>
-                        <span>السريعة</span>
-                    </div>
-                    <div class="side-category">
-                        <i class="fas fa-tag text-primary"></i>
-                        <span>الرخيصة</span>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-lightbulb text-warning me-2"></i>
+                                نصائح للأمان
+                            </h6>
+                            <ul class="list-unstyled small">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-1"></i> قابل البائع في مكان عام</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-1"></i> افحص المنتج جيداً قبل الشراء</li>
+                                <li><i class="fas fa-check-circle text-success me-1"></i> لا تدفع مقدماً دون رؤية المنتج</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -450,8 +437,10 @@
     <div class="modal fade modal-arabic" id="loginModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">تسجيل الدخول</h5>
+                <div class="modal-header" style="background: linear-gradient(135deg, #10b981, #0da271);">
+                    <h5 class="modal-title text-white">
+                        <i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول إلى سوق دير الزور المفتوح
+                    </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -464,9 +453,12 @@
                             <label class="form-label">كلمة المرور</label>
                             <input type="password" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3">تسجيل الدخول</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+                        </button>
                         <div class="text-center">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">إنشاء حساب جديد</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" 
+                               class="text-primary">ليس لديك حساب؟ سجل الآن</a>
                         </div>
                     </form>
                 </div>
@@ -478,8 +470,10 @@
     <div class="modal fade modal-arabic" id="registerModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إنشاء حساب جديد</h5>
+                <div class="modal-header" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                    <h5 class="modal-title text-white">
+                        <i class="fas fa-user-plus me-2"></i>انضم إلى سوق دير الزور المفتوح
+                    </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -506,7 +500,9 @@
                             <label class="form-label">كلمة المرور</label>
                             <input type="password" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-success w-100">إنشاء الحساب</button>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-user-plus me-2"></i> إنشاء الحساب
+                        </button>
                     </form>
                 </div>
             </div>
@@ -517,8 +513,10 @@
     <div class="modal fade modal-arabic" id="postAdModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إضافة إعلان جديد</h5>
+                <div class="modal-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                    <h5 class="modal-title text-white">
+                        <i class="fas fa-plus-circle me-2"></i>أضف إعلان جديد إلى سوق دير الزور المفتوح
+                    </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -540,27 +538,35 @@
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">السعر (ريال)</label>
-                                <input type="number" class="form-control" required>
+                                <label class="form-label">السعر (ريال سعودي)</label>
+                                <input type="number" class="form-control" placeholder="مثال: 5000" required>
                             </div>
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label">الوصف</label>
+                            <label class="form-label">الوصف التفصيلي</label>
                             <textarea class="form-control" rows="4" placeholder="صف المنتج بالتفصيل..." required></textarea>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">المدينة</label>
-                            <input type="text" class="form-control" required>
+                            <select class="form-select" required>
+                                <option value="">اختر المدينة</option>
+                                <option value="deir">دير الزور</option>
+                                <option value="damascus">دمشق</option>
+                                <option value="aleppo">حلب</option>
+                                <option value="homs">حمص</option>
+                            </select>
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label">رقم الهاتف</label>
-                            <input type="tel" class="form-control" required>
+                            <label class="form-label">رقم الهاتف للتواصل</label>
+                            <input type="tel" class="form-control" placeholder="مثال: 0991234567" required>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary w-100">نشر الإعلان</button>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-paper-plane me-2"></i> نشر الإعلان
+                        </button>
                     </form>
                 </div>
             </div>
@@ -572,41 +578,76 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">
-                        <i class="fas fa-store"></i> سوق الدير الزور
-                    </h5>
-                    <p>منصة سوق الدير الزور للبيع والشراء تمكنك من بيع وشراء كل ما تحتاجه بسهولة وأمان.</p>
+                    <div class="footer-brand">
+                        <i class="fas fa-store"></i>
+                        <div>
+                            <h5 class="mb-1">سوق دير الزور المفتوح</h5>
+                            <p class="mb-0 small">أكبر منصة للبيع والشراء في المنطقة</p>
+                        </div>
+                    </div>
+                    <p class="mt-3">منصة سوق دير الزور المفتوح تمكنك من بيع وشراء كل ما تحتاجه بسهولة وأمان. انضم إلى آلاف المستخدمين الراضين.</p>
+                    <div class="mt-4">
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-apple"></i> App Store
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6>روابط سريعة</h6>
-                    <div class="footer-links">
-                        <a href="#">الرئيسية</a>
-                        <a href="#categories">الأقسام</a>
-                        <a href="#ads">الإعلانات</a>
-                        <a href="#">اتصل بنا</a>
-                    </div>
+                    <h6 class="fw-bold mb-3">روابط سريعة</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">الرئيسية</a></li>
+                        <li class="mb-2"><a href="#categories" class="text-light text-decoration-none">الأقسام</a></li>
+                        <li class="mb-2"><a href="#ads" class="text-light text-decoration-none">الإعلانات</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">اتصل بنا</a></li>
+                    </ul>
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h6>الأقسام الشائعة</h6>
-                    <div class="footer-links">
-                        <a href="#">سيارات</a>
-                        <a href="#">عقارات</a>
-                        <a href="#">هواتف</a>
-                        <a href="#">أثاث</a>
-                    </div>
+                    <h6 class="fw-bold mb-3">الأقسام الشائعة</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">سيارات</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">عقارات</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">هواتف</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">أثاث</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">وظائف</a></li>
+                    </ul>
                 </div>
                 
                 <div class="col-lg-3 mb-4">
-                    <h6>تواصل معنا</h6>
-                    <p><i class="fas fa-phone"></i> +966 55 123 4567</p>
-                    <p><i class="fas fa-envelope"></i> info@souqaldeir.com</p>
+                    <h6 class="fw-bold mb-3">تواصل معنا</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+963 99 123 4567</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>info@souqdeir.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>دير الزور، سوريا</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    </div>
                 </div>
             </div>
             
-            <div class="text-center pt-4 border-top border-secondary">
-                <p>© 2024 سوق الدير الزور. جميع الحقوق محفوظة.</p>
+            <div class="pt-4 border-top border-secondary text-center">
+                <p class="mb-2">© 2024 سوق دير الزور المفتوح. جميع الحقوق محفوظة.</p>
+                <div>
+                    <a href="#" class="text-light text-decoration-none me-3">سياسة الخصوصية</a>
+                    <a href="#" class="text-light text-decoration-none">شروط الاستخدام</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -622,75 +663,80 @@
                 title: 'تويوتا كامري 2015 فل كامل',
                 price: 45000,
                 category: 'سيارات',
-                location: 'الرياض',
-                description: 'سيارة بحالة ممتازة، ماشية 120 ألف كم',
-                phone: '0551234567',
+                location: 'دير الزور',
+                description: 'سيارة بحالة ممتازة، ماشية 120 ألف كم، صبغ الوكالة',
+                phone: '0991234567',
                 user: 'أحمد محمد',
-                date: 'منذ يومين'
+                date: 'منذ يومين',
+                views: 125
             },
             {
                 id: 2,
                 title: 'آيفون 13 برو ماكس 256 جيجا',
                 price: 3800,
                 category: 'هواتف',
-                location: 'جدة',
+                location: 'دمشق',
                 description: 'بحالة ممتازة، شاشة سليمة، البطارية 95%',
-                phone: '0557654321',
+                phone: '0997654321',
                 user: 'سارة علي',
-                date: 'منذ 3 أيام'
+                date: 'منذ 3 أيام',
+                views: 89
             },
             {
                 id: 3,
-                title: 'شقة للإيجار حي النخيل',
-                price: 35000,
+                title: 'شقة للإيجار حي الجورة',
+                price: 350000,
                 category: 'عقارات',
-                location: 'الدمام',
-                description: '3 غرف نوم، صالة كبيرة، مطبخ أمريكي',
-                phone: '0559876543',
+                location: 'دير الزور',
+                description: '3 غرف نوم، صالة كبيرة، مطبخ حديث',
+                phone: '0999876543',
                 user: 'خالد عبدالله',
-                date: 'منذ 4 أيام'
+                date: 'منذ 4 أيام',
+                views: 156
             },
             {
                 id: 4,
                 title: 'ثلاجة سامسونج 20 قدم جديدة',
                 price: 2200,
                 category: 'أجهزة كهربائية',
-                location: 'الرياض',
-                description: 'جديدة بالكرتونة، ضمان سنتين',
-                phone: '0551122334',
+                location: 'حلب',
+                description: 'جديدة بالكرتونة، ضمان سنتين، طاقة موفرة',
+                phone: '0991122334',
                 user: 'فاطمة حسن',
-                date: 'منذ 5 أيام'
+                date: 'منذ 5 أيام',
+                views: 78
             },
             {
                 id: 5,
                 title: 'مجموعة كتب علمية نادرة',
                 price: 800,
                 category: 'كتب',
-                location: 'مكة',
+                location: 'دير الزور',
                 description: 'كتب نادرة في الفيزياء والرياضيات',
-                phone: '0555566778',
+                phone: '0995566778',
                 user: 'علي حسين',
-                date: 'منذ أسبوع'
+                date: 'منذ أسبوع',
+                views: 45
             },
             {
                 id: 6,
-                title: 'وظيفة مبرمج ويب',
+                title: 'وظيفة مبرمج ويب مطلوب',
                 price: 0,
                 category: 'وظائف',
-                location: 'الرياض',
-                description: 'مطلوب مبرمج ويب بخبرة 3 سنوات',
-                phone: '0559988776',
+                location: 'دير الزور',
+                description: 'مطلوب مبرمج ويب بخبرة 3 سنوات، راتب ممتاز',
+                phone: '0999988776',
                 user: 'شركة التقنية',
-                date: 'منذ يومين'
+                date: 'منذ يومين',
+                views: 234
             }
         ];
 
         // تحميل الإعلانات عند بدء التشغيل
         document.addEventListener('DOMContentLoaded', function() {
             loadAds();
-            
-            // إعداد أحداث النماذج
             setupForms();
+            updateStats();
         });
 
         // تحميل وعرض الإعلانات
@@ -701,35 +747,37 @@
             container.innerHTML = '';
             
             adsData.forEach(ad => {
-                const adCard = createAdCard(ad);
-                container.appendChild(adCard);
+                const adElement = createAdElement(ad);
+                container.appendChild(adElement);
             });
         }
 
-        // إنشاء بطاقة إعلان
-        function createAdCard(ad) {
+        // إنشاء عنصر إعلان
+        function createAdElement(ad) {
             const col = document.createElement('div');
-            col.className = 'col-md-4 col-sm-6';
+            col.className = 'col-md-4 col-sm-6 mb-4';
             
-            const priceText = ad.price > 0 ? `${ad.price.toLocaleString()} ر.س` : 'تواصل';
+            const priceText = ad.price > 0 ? `${ad.price.toLocaleString('ar-SY')} ل.س` : 'تواصل';
             
             col.innerHTML = `
-                <div class="ad-card" onclick="viewAd(${ad.id})">
+                <div class="ad-card h-100" onclick="showAdDetails(${ad.id})">
                     <div class="ad-image">
                         <i class="fas fa-image fa-3x"></i>
                         <div class="ad-price">${priceText}</div>
                     </div>
-                    <div class="ad-content">
+                    <div class="ad-content d-flex flex-column">
                         <h5 class="ad-title">${ad.title}</h5>
-                        <div class="ad-location">
+                        <div class="ad-location mb-2">
                             <i class="fas fa-map-marker-alt"></i> ${ad.location}
                         </div>
-                        <p class="text-muted mb-3">${ad.description}</p>
-                        <div class="ad-user">
-                            <div class="user-avatar">${ad.user.charAt(0)}</div>
-                            <div>
-                                <div class="small">${ad.user}</div>
-                                <div class="text-muted small">${ad.date}</div>
+                        <p class="text-muted small flex-grow-1">${ad.description.substring(0, 80)}...</p>
+                        <div class="ad-user mt-3 pt-3 border-top">
+                            <div class="d-flex align-items-center">
+                                <div class="user-avatar me-2">${ad.user.charAt(0)}</div>
+                                <div>
+                                    <div class="small">${ad.user}</div>
+                                    <div class="text-muted small">${ad.date}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -740,79 +788,100 @@
         }
 
         // عرض تفاصيل الإعلان
-        function viewAd(adId) {
+        function showAdDetails(adId) {
             const ad = adsData.find(a => a.id === adId);
             if (!ad) return;
             
-            const priceText = ad.price > 0 ? `${ad.price.toLocaleString()} ر.س` : 'مجاناً';
+            const priceText = ad.price > 0 ? `${ad.price.toLocaleString('ar-SY')} ليرة سورية` : 'مجاناً';
             
             const modalContent = `
-                <div class="modal-header">
-                    <h5 class="modal-title">${ad.title}</h5>
+                <div class="modal-header" style="background: linear-gradient(135deg, #10b981, #0da271);">
+                    <h5 class="modal-title text-white">${ad.title}</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="text-center mb-4">
-                        <div class="ad-image-large mb-3">
-                            <i class="fas fa-image fa-5x"></i>
+                        <div class="position-relative mb-3">
+                            <div style="height: 250px; background: #f3f4f6; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-image fa-5x text-muted"></i>
+                            </div>
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-primary">${ad.category}</span>
+                            </div>
                         </div>
-                        <h3 class="text-success">${priceText}</h3>
+                        <h2 class="text-success">${priceText}</h2>
                     </div>
                     
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <strong>القسم:</strong> ${ad.category}
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">
+                                        <i class="fas fa-map-marker-alt me-2"></i>الموقع
+                                    </h6>
+                                    <p class="card-text fw-bold">${ad.location}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <strong>المدينة:</strong> ${ad.location}
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">
+                                        <i class="fas fa-user me-2"></i>البائع
+                                    </h6>
+                                    <p class="card-text fw-bold">${ad.user}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="mb-3">
-                        <strong>رقم الهاتف:</strong>
-                        <div class="mt-1">
-                            <a href="tel:${ad.phone}" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-phone"></i> ${ad.phone}
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-info-circle me-2"></i>الوصف التفصيلي
+                        </h6>
+                        <p class="bg-light p-3 rounded">${ad.description}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-phone me-2"></i>اتصل بالبائع
+                        </h6>
+                        <div class="d-flex gap-2">
+                            <a href="tel:${ad.phone}" class="btn btn-primary flex-grow-1">
+                                <i class="fas fa-phone me-2"></i> ${ad.phone}
                             </a>
-                            <a href="https://wa.me/966${ad.phone.substring(1)}" 
-                               class="btn btn-outline-success btn-sm" target="_blank">
-                                <i class="fab fa-whatsapp"></i> واتساب
+                            <a href="https://wa.me/963${ad.phone.substring(2)}?text=مرحباً، أنا مهتم بإعلانك: ${ad.title}" 
+                               class="btn btn-success" target="_blank">
+                                <i class="fab fa-whatsapp me-2"></i> واتساب
                             </a>
                         </div>
                     </div>
                     
-                    <div class="mb-3">
-                        <strong>الوصف:</strong>
-                        <p class="mt-1">${ad.description}</p>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <strong>الناشر:</strong> ${ad.user}
-                    </div>
-                    
-                    <div>
-                        <strong>تاريخ النشر:</strong> ${ad.date}
+                    <div class="text-center text-muted small">
+                        <i class="far fa-eye me-1"></i> ${ad.views || 0} مشاهدة
+                        <span class="mx-2">•</span>
+                        <i class="far fa-clock me-1"></i> ${ad.date}
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                     <a href="tel:${ad.phone}" class="btn btn-success">
-                        <i class="fas fa-phone"></i> اتصل الآن
+                        <i class="fas fa-phone-alt me-2"></i> اتصل الآن
                     </a>
                 </div>
             `;
             
-            // إنشاء وعرض النافذة المنبثقة
+            // إنشاء وعرض النافذة
             const modalId = 'adDetailsModal';
             let modal = document.getElementById(modalId);
             
             if (!modal) {
                 modal = document.createElement('div');
                 modal.id = modalId;
-                modal.className = 'modal fade modal-arabic';
+                modal.className = 'modal fade';
                 modal.tabIndex = -1;
                 modal.innerHTML = `
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             ${modalContent}
                         </div>
@@ -827,16 +896,14 @@
             bsModal.show();
         }
 
-        // إعداد أحداث النماذج
+        // إعداد النماذج
         function setupForms() {
             // نموذج إضافة إعلان
             const postAdForm = document.getElementById('postAdForm');
             if (postAdForm) {
                 postAdForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    // في التطبيق الحقيقي، هنا ستتم إضافة الإعلان إلى قاعدة البيانات
-                    alert('تم نشر إعلانك بنجاح!');
+                    showMessage('تم نشر إعلانك بنجاح وسيظهر بعد المراجعة!', 'success');
                     $('#postAdModal').modal('hide');
                     this.reset();
                 });
@@ -847,7 +914,7 @@
             if (loginForm) {
                 loginForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('تم تسجيل الدخول بنجاح!');
+                    showMessage('تم تسجيل الدخول بنجاح!', 'success');
                     $('#loginModal').modal('hide');
                     this.reset();
                 });
@@ -858,12 +925,50 @@
             if (registerForm) {
                 registerForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('تم إنشاء حسابك بنجاح!');
+                    showMessage('تم إنشاء حسابك بنجاح!', 'success');
                     $('#registerModal').modal('hide');
                     this.reset();
                 });
             }
         }
+
+        // تحديث الإحصائيات
+        function updateStats() {
+            // يمكن إضافة تحديث إحصائيات حقيقي هنا
+            console.log('سوق دير الزور المفتوح - جاهز للعمل!');
+        }
+
+        // عرض رسالة
+        function showMessage(message, type = 'success') {
+            // إنشاء عنصر الرسالة
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} position-fixed`;
+            alertDiv.style.cssText = `
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                min-width: 300px;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            alertDiv.innerHTML = `
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // إزالة الرسالة بعد 3 ثوانٍ
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        // تصدير الدوال للاستخدام العالمي
+        window.showAdDetails = showAdDetails;
     </script>
 </body>
 </html>
