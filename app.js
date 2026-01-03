@@ -1,4 +1,4 @@
-// ملف app.js
+    // ملف app.js
 
 // تهيئة التطبيق
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,7 +15,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // تحديث الإحصائيات
     updateStats();
-});
+});// نظام تسجيل الأخطاء للهاتف
+const errorLog = [];
+const originalConsoleError = console.error;
+
+console.error = function(...args) {
+    errorLog.push(args.join(' '));
+    if (errorLog.length > 10) errorLog.shift(); // حفظ آخر 10 أخطاء فقط
+    originalConsoleError.apply(console, args);
+    
+    // عرض تحذير بصري
+    showErrorNotification(args[0]);
+};
+
+function showErrorNotification(error) {
+    if (!document.getElementById('errorToast')) {
+        const toast = document.createElement('div');
+        toast.id = 'errorToast';
+        toast.style = 'position:fixed; top:20px; right:20px; background:#ef4444; color:white; padding:10px; border-radius:5px; z-index:10000; max-width:300px;';
+        document.body.appendChild(toast);
+    }
+    
+    const toast = document.getElementById('errorToast');
+    toast.innerHTML = `⚠️ ${error.toString().substring(0, 50)}...`;
+    toast.style.display = 'block';
+    
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 5000);
+}
+
+// زر لعرض جميع الأخطاء
+const debugBtn = document.createElement('button');
+debugBtn.innerHTML = '🐛';
+debugBtn.style = 'position:fixed; bottom:20px; right:20px; width:40px; height:40px; border-radius:50%; background:#3b82f6; color:white; border:none; z-index:9999; font-size:20px;';
+debugBtn.onclick = () => {
+    alert('آخر الأخطاء:\n\n' + errorLog.join('\n\n'));
+};
+document.body.appendChild(debugBtn);
 
 // تهيئة البيانات
 function initData() {
