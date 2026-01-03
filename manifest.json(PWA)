@@ -1,0 +1,21 @@
+{
+  "name": "سوق الدير الزور",
+  "short_name": "السوق المفتوح",
+  "description": "منصة السوق المفتوح للبيع والشراء في الدير الزور",
+  "start_url": "/Souq-Aldeir/index.html",
+  "display": "standalone",
+  "background_color": "#10b981",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/891/891419.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/891/891419.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
