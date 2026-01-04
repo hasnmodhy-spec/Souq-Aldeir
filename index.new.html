@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق دير الزور المفتوح - الإعلانات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* الهيدر */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        .publish-btn {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .publish-btn:hover {
+            background-color: #059669;
+        }
+        
+        /* الفئات */
+        .categories {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        
+        .categories h2 {
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+        
+        .category-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        /* الإعلانات */
+        .ads-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .ad-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .ad-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .ad-content {
+            padding: 1.2rem;
+        }
+        
+        .ad-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .ad-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .ad-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .ad-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #059669;
+        }
+        
+        .ad-category {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .contact-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: #2563eb;
+        }
+        
+        /* الفوتر */
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        /* للجوال */
+        @media (max-width: 768px) {
+            .ads-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .header-content {
+                text-align: center;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🏪</span>
+                <span>سوق دير الزور المفتوح</span>
+            </div>
+            <p>منصة مجانية للإعلانات المبوبة في دير الزور</p>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="🔍 ابحث عن سيارة، شقة، هاتف، أثاث..." id="searchInput">
+                <button class="publish-btn" onclick="window.location.href='/index.html'">
+                    + نشر إعلان مجاني
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- الفئات -->
+    <section class="categories">
+        <h2>التصنيفات</h2>
+        <div class="category-list">
+            <button class="category-btn active" onclick="filterAds('all')">جميع الإعلانات</button>
+            <button class="category-btn" onclick="filterAds('سيارات')">🚗 سيارات</button>
+            <button class="category-btn" onclick="filterAds('عقارات')">🏠 عقارات</button>
+            <button class="category-btn" onclick="filterAds('إلكترونيات')">📱 إلكترونيات</button>
+            <button class="category-btn" onclick="filterAds('أثاث')">🛋️ أثاث</button>
+            <button class="category-btn" onclick="filterAds('خدمات')">🔧 خدمات</button>
+            <button class="category-btn" onclick="filterAds('مواصلات')">🏍️ مواصلات</button>
+        </div>
+    </section>
+
+    <!-- الإعلانات -->
+    <section class="ads-container">
+        <h2 style="margin-bottom: 1.5rem;">أحدث الإعلانات (<span id="adCount">12</span>)</h2>
+        
+        <div class="ads-grid" id="adsGrid">
+            <!-- الإعلانات ستظهر هنا جافا سكريبت -->
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <h3>سوق دير الزور المفتوح</h3>
+        <p style="margin: 1rem 0; color: #d1d5db;">منصة مجانية للإعلانات المبوبة في محافظة دير الزور</p>
+        <p style="color: #9ca3af; font-size: 0.9rem;">
+            © 2024 جميع الحقوق محفوظة | تواصل معنا: info@deirezzor-market.com
+        </p>
+    </footer>
+
+    <script>
+        // بيانات إعلانات تجريبية
+        const ads = [
+            {
+                id: 1,
+                title: 'ساعة أبل ذكية جديدة',
+                description: 'Apple Watch Series 9 بحالة ممتازة، مقاومة للماء، شاشة OLED',
+                price: '1,500',
+                category: 'إلكترونيات',
+                location: 'دير الزور - الحي الجديد',
+                image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400',
+                views: 42,
+                negotiable: true
+            },
+            {
+                id: 2,
+                title: 'شقة فخمة للإيجار',
+                description: '3 غرف نوم، 2 حمام، صالة كبيرة، مطبخ حديث، تشطيب سوبر لوكس',
+                price: '1,200',
+                category: 'عقارات',
+                location: 'دير الزور - حي القصور',
+                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400',
+                views: 156,
+                negotiable: false
+            },
+            {
+                id: 3,
+                title: 'سيارة تويوتا كامري 2020',
+                description: 'فل كامل، ماشية 50,000 كم فقط، لون أبيض، بحالة الوكالة',
+                price: '85,000',
+                category: 'سيارات',
+                location: 'دير الزور - المركز',
+                image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400',
+                views: 203,
+                negotiable: true
+            },
+            {
+                id: 4,
+                title: 'لابتوب ديل للبيع',
+                description: 'شاشة 15 بوصة، 16GB RAM، SSD 512GB، كرت شاشة منفصل',
+                price: '2,800',
+                category: 'إلكترونيات',
+                location: 'دير الزور - الجامعة',
+                image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400',
+                views: 87,
+                negotiable: true
+            },
+            {
+                id: 5,
+                title: 'أثاث منزل كامل',
+                description: 'كنبة 3 مقاعد، طاولة طعام، 6 كراسي، خزانة ملابس كبيرة',
+                price: '3,200',
+                category: 'أثاث',
+                location: 'دير الزور - شارع الثورة',
+                image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400',
+                views: 64,
+                negotiable: true
+            },
+            {
+                id: 6,
+                title: 'دراجة نارية هارلي ديفيدسون',
+                description: 'موديل 2021، 1500cc، لون أحمر، ماشية 8000 كم فقط',
+                price: '45,000',
+                category: 'مواصلات',
+                location: 'دير الزور - حي الأندلس',
+                image: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400',
+                views: 128,
+                negotiable: false
+            },
+            {
+                id: 7,
+                title: 'هاتف سامسونج جالكسي S23',
+                description: '256GB، لون أسود، شاشة سليمة، ضمان سنتين، علبة أصلية',
+                price: '2,400',
+                category: 'إلكترونيات',
+                location: 'دير الزور - السوق التجاري',
+                image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400',
+                views: 91,
+                negotiable: true
+            },
+            {
+                id: 8,
+                title: 'خدمة نقل عفش',
+                description: 'نقل عفش مع الفك والتركيب، عمالة مدربة، أسعار مناسبة',
+                price: '200',
+                category: 'خدمات',
+                location: 'دير الزور - جميع الأحياء',
+                image: 'https://images.unsplash.com/photo-1600881331445-258aafe50b56?w=400',
+                views: 45,
+                negotiable: true
+            },
+            {
+                id: 9,
+                title: 'ثلاجة سامسونج جديدة',
+                description: 'ثلاجة سامسونج 20 قدم، لون فضي، ضمان 5 سنوات، توصيل مجاني',
+                price: '3,500',
+                category: 'أجهزة كهربائية',
+                location: 'دير الزور - حي المطار',
+                image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400',
+                views: 72,
+                negotiable: false
+            },
+            {
+                id: 10,
+                title: 'ماكينة خياطة صناعية',
+                description: 'ماكينة خياطة جوكي صناعية، حالة ممتازة، إنتاجية عالية',
+                price: '1,800',
+                category: 'معدات',
+                location: 'دير الزور - المنطقة الصناعية',
+                image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400',
+                views: 33,
+                negotiable: true
+            },
+            {
+                id: 11,
+                title: 'غرفة نوم أطفال',
+                description: 'سرير طفل + دولاب + كومودينو، خشب زان، لون أبيض',
+                price: '1,100',
+                category: 'أثاث',
+                location: 'دير الزور - حي الزهور',
+                image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400',
+                views: 58,
+                negotiable: true
+            },
+            {
+                id: 12,
+                title: 'مولد كهرباء 10 KVA',
+                description: 'مولد كهرباء بيركنز، 10 كيلو فولت أمبير، ديزل، حالة ممتازة',
+                price: '12,000',
+                category: 'معدات',
+                location: 'دير الزور - الريف',
+                image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400',
+                views: 29,
+                negotiable: true
+            }
+        ];
+
+        // عرض الإعلانات
+        function displayAds(adsToShow) {
+            const adsGrid = document.getElementById('adsGrid');
+            const adCount = document.getElementById('adCount');
+            
+            adsGrid.innerHTML = '';
+            adCount.textContent = adsToShow.length;
+            
+            adsToShow.forEach(ad => {
+                const adCard = document.createElement('div');
+                adCard.className = 'ad-card';
+                adCard.innerHTML = `
+                    <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                    <div class="ad-content">
+                        <h3 class="ad-title">${ad.title}</h3>
+                        <p class="ad-description">${ad.description}</p>
+                        <div style="color: #6b7280; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                            📍 ${ad.location}
+                        </div>
+                        <div class="ad-footer">
+                            <div>
+                                <div class="ad-price">${ad.price} ل.س</div>
+                                ${ad.negotiable ? '<div style="color: #059669; font-size: 0.8rem;">قابل للتفاوض</div>' : ''}
+                            </div>
+                            <span class="ad-category">${ad.category}</span>
+                        </div>
+                        <button class="contact-btn" onclick="contactSeller(${ad.id})">
+                            📞 اتصل بالبائع
+                        </button>
+                        <div style="text-align: left; margin-top: 0.5rem; color: #9ca3af; font-size: 0.8rem;">
+                            👁️ ${ad.views} مشاهدة
+                        </div>
+                    </div>
+                `;
+                adsGrid.appendChild(adCard);
+            });
+        }
+
+        // فلترة الإعلانات
+        let currentFilter = 'all';
+        
+        function filterAds(category) {
+            currentFilter = category;
+            
+            // تحديد أزرار الفئات النشطة
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // فلترة الإعلانات
+            let filteredAds = ads;
+            if (category !== 'all') {
+                filteredAds = ads.filter(ad => ad.category === category);
+            }
+            
+            displayAds(filteredAds);
+        }
+
+        // البحث
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            let filteredAds = ads;
+            
+            if (currentFilter !== 'all') {
+                filteredAds = filteredAds.filter(ad => ad.category === currentFilter);
+            }
+            
+            if (searchTerm) {
+                filteredAds = filteredAds.filter(ad => 
+                    ad.title.toLowerCase().includes(searchTerm) ||
+                    ad.description.toLowerCase().includes(searchTerm) ||
+                    ad.location.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            displayAds(filteredAds);
+        });
+
+        // اتصل بالبائع
+        function contactSeller(adId) {
+            const ad = ads.find(a => a.id === adId);
+            alert(`اتصال بالبائع:\n\nالعنوان: ${ad.title}\nالسعر: ${ad.price} ليرة سورية\n\nرقم الاتصال: 09XX XXX XXX\n\nيمكنك التواصل مع البائع على هذا الرقم.`);
+        }
+
+        // التهيئة الأولية
+        displayAds(ads);
+    </script>
+</body>
+</html>
